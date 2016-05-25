@@ -1,0 +1,170 @@
+#!/usr/bin/env python3
+import os
+import sys
+import shutil
+import logging
+import subprocess
+from urllib.error import HTTPError
+from urllib.request import urlopen
+
+# Target destination.  Will be $HOME when not testing
+TARGET = os.path.expanduser('~')
+BASE = os.path.abspath(os.path.dirname(__file__))
+CONFIG = os.getenv('XDG_CONFIG_HOME', os.path.join(TARGET, '.config'))
+CACHE = os.getenv('XDG_CACHE_HOME', os.path.join(TARGET, '.cache'))
+DATA = os.getenv('XDG_DATA_HOME', os.path.join(TARGET, '.local/share'))
+
+os.chdir(BASE)
+log = logging.getLogger()
+
+
+class InstallError(Exception):
+    pass
+
+
+class LogColorFormatter(logging.Formatter):
+    colors = {
+        logging.DEBUG: 7,
+        logging.INFO: 6,
+        logging.WARN: 3,
+        logging.ERROR: 1,
+        logging.FATAL: 9,
+    }
+
+    def __init__(self):
+        super(LogColorFormatter, self).__init__('{message}', style='{')
+
+    def format(self, record):
+        msg = super(LogColorFormatter, self).format(record)
+        return '\x1b[38;5;%dm%s\x1b[m' % (self.colors.get(record.levelno, 7), msg)
+
+
+def link(src, dst=None):
+    if not dst:
+        dst = os.path.join(TARGET, os.path.basename(src))
+    else:
+        dst = os.path.join(TARGET, dst)
+    src = os.path.join(BASE, src)
+    if not os.path.exists(src):
+        raise InstallError('Link source does not exist: %s' % src)
+    if os.path.exists(dst) and not os.path.islink(dst):
+        raise InstallError('Link destination exists and is not a symlnk: %s' % dst)
+    if os.path.islink(dst):
+        os.unlink(dst)
+    os.symlink(src, dst)
+    log.info('Linking %s -> %s', src, dst)
+
+
+def mkdir(path, perms=0o0755):
+    if not os.path.isdir(path):
+        umask = os.umask(0)
+        log.debug('Creating directory: %s', path)
+        os.makedirs(path, perms)
+        os.umask(umask)
+
+
+def link_directory(src, dst, excludes=None):
+    for filename in os.listdir(src):
+        if excludes and filename in excludes:
+            continue
+        link(os.path.join(src, filename), os.path.join(dst, filename))
+
+
+def download(url, dst):
+    try:
+        with urlopen(url) as response:
+            with open(dst, 'wb') as fp:
+                fp.write(response.read())
+                log.info('Downloaded: %s -> %s', url, dst)
+    except HTTPError as e:
+        raise InstallError('Could not download %s: %d - %s', url, e.code,
+                           e.reason)
+
+
+def run(command, env=None):
+    s_env = os.environ.copy()
+    if isinstance(env, dict):
+        s_env.update(env)
+    log.warn('Running: %s', command)
+    p = subprocess.Popen(command, stdout=sys.stdout, stderr=sys.stderr,
+                         shell=True, env=s_env)
+    p.communicate()
+
+
+def copy(src, dst):
+    src = os.path.join(BASE, src)
+    dst = os.path.join(TARGET, dst)
+    shutil.copy(src, dst)
+
+
+def install_vim():
+    nvim_path = os.path.join(CONFIG, 'nvim')
+    mkdir(nvim_path)
+
+    for p in ('autoload', 'undo', 'spell'):
+        mkdir(os.path.join(nvim_path, p))
+
+    spell_base = os.path.join(BASE, 'vim/spell')
+    for p in os.listdir(spell_base):
+        copy(os.path.join(spell_base, p), os.path.join(nvim_path, 'spell', p))
+
+    download('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim',
+             os.path.join(nvim_path, 'autoload/plug.vim'))
+    link_directory('vim', nvim_path, excludes=('spell',))
+    link('vim/init.vim', '.vimrc')
+    run('nvim +PlugInstall +qall')
+    run('nvim +UpdateRemotePlugins +qall')
+
+
+def install_zsh():
+    if not os.path.isdir(os.path.join(TARGET, '.zplug')):
+        run('curl -L get.zplug.sh | zsh')
+    link('zsh/zshrc.zsh', '.zshrc')
+    link('zsh/zshenv.zsh', '.zshenv')
+    run('zsh -c "source %s/.zshrc"' % TARGET, {'DOTFILES_SETUP': '1'})
+
+
+def install():
+    handler = logging.StreamHandler(sys.stderr)
+    handler.setFormatter(LogColorFormatter())
+    log.addHandler(handler)
+    log.setLevel(logging.DEBUG)
+
+    mkdir(os.path.join(TARGET, 'bin'))
+
+    for path in (CONFIG, CACHE, DATA):
+        mkdir(path, 0o0700)
+
+    # Reset generated scripts
+    gen = (
+        'zsh/_setup_zshrc.zsh',
+        'zsh/_setup_zshenv.zsh',
+    )
+
+    for item in gen:
+        with open(item, 'wt') as fp:
+            fp.write('# Generated.  Do not edit.\n\n')
+
+    link('git/gitconfig', '.gitconfig')
+    link('git/gitignore', '.gitignore_global')
+    link('misc/ctags', '.ctags')
+    link('misc/editorconfig', '.editorconfig')
+    link('misc/inputrc', '.inputrc')
+    link('misc/npmrc', '.npmrc')
+
+    link('bin/dev-layout.sh', 'bin/dev-layout')
+
+    run('scripts/gen-terminfo.sh')
+    run('scripts/setup-homebrew.sh')
+    run('scripts/setup-pyenv.sh')
+    run('scripts/setup-golang.sh')
+
+    install_zsh()
+    install_vim()
+
+
+if __name__ == "__main__":
+    try:
+        install()
+    except InstallError as e:
+        log.error(e)

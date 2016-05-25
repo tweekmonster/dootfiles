@@ -1,0 +1,1 @@
+alias top='top -u'

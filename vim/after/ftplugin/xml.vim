@@ -1,0 +1,1 @@
+setlocal foldlevelstart=2

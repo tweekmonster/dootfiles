@@ -1,0 +1,19 @@
+[core]
+editor = nvim
+excludesfile = ~/.gitignore_global
+
+[include]
+path = ~/.gitconfig_local
+
+[push]
+default = simple
+
+[user]
+name = Tommy Allen
+email = tommy@esdf.io
+
+[github]
+user = tweekmonster
+
+[alias]
+ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ | tail -n+3 ;}; gi"
