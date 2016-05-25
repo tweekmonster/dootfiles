@@ -153,6 +153,7 @@ def install():
     link('misc/npmrc', '.npmrc')
 
     link('bin/dev-layout.sh', 'bin/dev-layout')
+    link('tmux/tmux.conf', '.tmux.conf')
 
     run('scripts/gen-terminfo.sh')
     run('scripts/setup-homebrew.sh')
