@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 VERSION="1.6.2"
 DIST="linux"
+XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 GOROOT="$XDG_CACHE_HOME/go/${VERSION}"
 TMPDIR="$XDG_CACHE_HOME/gosetup"
 

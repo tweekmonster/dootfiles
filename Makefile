@@ -8,3 +8,6 @@ install: ## Install dotfiles
 
 clean-links:  ## Removes symlinks
 	find $(HOME) -type l -lname "$(PWD)/*" -delete
+
+clean-old-links:  ## Removes old dotfiles symlinks
+	find $(HOME) -type l -lname "$(HOME)/dotfiles/*" -delete

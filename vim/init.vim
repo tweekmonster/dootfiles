@@ -17,7 +17,7 @@ endif
 " specific.  If the designated plugin directory does not exist, do not load
 " plugin specific configs to avoid startup errors on first run.
 function! s:source(dir) abort
-  for filename in sort(glob(g:_vimrc_base.'/_source/'.a:dir.'/*.vim', 0, 1), 'N')
+  for filename in sort(glob(g:_vimrc_base.'/_source/'.a:dir.'/*.vim', 0, 1))
     if !g:_vimrc_init && str2nr(fnamemodify(filename, ':t')[:1]) > 3
       continue
     endif

@@ -14,8 +14,8 @@ tmux
 )
 
 BREW_BIN=""
-if [[ "$(uname)" == "Darwin" && ! -e "/usr/local/bin/brew" ]]; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if [[ "$(uname)" == "Darwin" ]]; then
+  [[ ! -e "/usr/local/bin/brew" ]] && /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 elif [[ ! -e "$HOME/.linuxbrew/bin/brew" ]]; then
   if [[ "$(id -n -G)" == *sudo* ]]; then
     sudo apt-get install build-essential curl git python-setuptools ruby

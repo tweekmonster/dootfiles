@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 PYENV_ROOT="$HOME/.pyenv"
 
 install_pyenv() {
