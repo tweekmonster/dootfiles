@@ -8,7 +8,7 @@ TMPDIR="$XDG_CACHE_HOME/gosetup"
 if [[ ! -d "$GOROOT" ]]; then
   mkdir -p "$(dirname $GOROOT)"
   ext="tar.gz"
-  if [[ "$(uname)" =~ darwin ]]; then
+  if [[ "$(uname)" =~ Darwin ]]; then
     DIST='darwin'
     ext="pkg"
   fi
@@ -20,15 +20,16 @@ if [[ ! -d "$GOROOT" ]]; then
   if [[ "$DIST" == "darwin" ]]; then
     dir="$PWD"
     cd "$TMPDIR"
-    xar -xf "go.${ext}"
+    xar -xf "go.${USER}.${ext}"
     cat com.googlecode.go.pkg/Payload | gunzip -dc | cpio -i
     mv "usr/local/go" "$GOROOT"
+    cd "$dir"
   else
     tar zxf "$TMPFILE" -C "$TMPDIR/go" --strip-components=1
     mv "$TMPDIR/go" "$GOROOT"
   fi
 
-  rm -rf "$TMPDIR"
+  # rm -rf "$TMPDIR"
 fi
 
 cat <<EOF >> zsh/_setup_zshenv.zsh
