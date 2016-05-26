@@ -125,8 +125,9 @@ def install_vim():
 
 
 def install_zsh():
-    if not os.path.isdir(os.path.join(TARGET, '.zplug')):
-        run('curl -L get.zplug.sh | zsh')
+    zplug = os.path.join(TARGET, '.local', 'zplug')
+    if not os.path.isdir(zplug):
+        run('curl -L get.zplug.sh | env ZPLUG_HOME="%s" zsh' % zplug)
     link('zsh/zshrc.zsh', '.zshrc')
     link('zsh/zshenv.zsh', '.zshenv')
     run('zsh -c "source %s/.zshrc"' % TARGET, {'DOTFILES_SETUP': '1'})

@@ -1,19 +1,21 @@
-script_base=$(dirname "${${(%):-%N}:A}")
-source $HOME/.zplug/init.zsh
+export ZPLUG_HOME="$HOME/.local/zplug"
+source "$ZPLUG_HOME/init.zsh"
 setopt hist_ignore_all_dups
 setopt correct
 
+script_base=$(dirname "${${(%):-%N}:A}")
+
 zplug 'zplug/zplug'
 zplug 'tj/git-extras'
-zplug 'tweekmonster/nanofish'
 zplug 'lib/history', from:oh-my-zsh
 zplug 'lib/completion', from:oh-my-zsh
 zplug 'lib/directories', from:oh-my-zsh
 zplug 'lib/git', from:oh-my-zsh
 zplug 'lib/theme-and-appearance', from:oh-my-zsh
-zplug 'zsh-users/zsh-syntax-highlighting'
+zplug 'zsh-users/zsh-syntax-highlighting', nice:10
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-history-substring-search'
+zplug 'tweekmonster/nanofish', nice:10
 
 if [[ -z $DOTFILES_SETUP ]]; then
   if ! zplug check --verbose; then
