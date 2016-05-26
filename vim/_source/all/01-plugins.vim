@@ -125,6 +125,7 @@ Plug 'Shougo/neco-vim'
 
 " Shougo - Deoplete
 Plug 'carlitux/deoplete-ternjs'
+Plug 'zchee/deoplete-jedi'
 
 " junegunn
 Plug 'junegunn/fzf', {'do': './install --bin'}
@@ -197,6 +198,7 @@ Plug 'csscomb/vim-csscomb'
 Plug 'posva/vim-vue'
 
 " Misc File Types
+Plug 'davidhalter/jedi-vim'
 Plug 'hdima/python-syntax'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'fatih/vim-go'
