@@ -126,3 +126,4 @@ autocmd BufRead,BufNewFile *.py,*.htm,*.html call <sid>detect(expand('<afile>'))
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
+
