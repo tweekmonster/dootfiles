@@ -17,11 +17,6 @@ BREW_BIN=""
 if [[ "$(uname)" == "Darwin" ]]; then
   [[ ! -e "/usr/local/bin/brew" ]] && /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 elif [[ ! -e "$HOME/.linuxbrew/bin/brew" ]]; then
-  if [[ "$(id -n -G)" == *sudo* ]]; then
-    sudo apt-get install build-essential curl git python-setuptools ruby
-  else
-    echo "User can not run sudo commands" >&2
-  fi
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)" < /dev/null
 fi
 

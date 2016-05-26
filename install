@@ -164,6 +164,7 @@ def install():
     link('tmux/tmux.conf', '.tmux.conf')
 
     run('scripts/gen-terminfo.sh')
+    run('scripts/setup-debian.sh')
     run('scripts/setup-homebrew.sh')
     run('scripts/setup-pyenv.sh')
     run('scripts/setup-golang.sh')
