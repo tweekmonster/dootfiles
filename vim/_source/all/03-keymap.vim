@@ -46,7 +46,26 @@ inoremap <nowait> <esc> <esc>
 nnoremap gV `[v`]
 
 " Delete a buffer
-nnoremap <silent> <leader>q :bp<bar>sp<bar>bn<bar>bd<cr>
+function! s:delete_buffer() abort
+  if &l:modified
+    echohl ErrorMsg
+    echomsg 'File is modified'
+    echohl None
+    return
+  endif
+
+  let bufcount = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+  if bufcount == 1
+    return
+  endif
+
+  bprevious
+  split
+  bnext
+  bdelete
+endfunction
+
+nnoremap <silent> <leader>q :<c-u>call <sid>delete_buffer()<cr>
 
 " Profiling
 nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
