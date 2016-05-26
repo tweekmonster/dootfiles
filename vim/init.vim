@@ -6,6 +6,7 @@ endif
 let g:_vimrc_base = expand('<sfile>:p:h')
 let g:_vimrc_plugins = g:_vimrc_base.'/plugins'
 let g:_vimrc_init = isdirectory(g:_vimrc_plugins)
+let g:_vimrc_dev_dir = expand('~/dev/vim')
 
 if !exists('g:_vimrc_sources')
   let g:_vimrc_sources = {}
