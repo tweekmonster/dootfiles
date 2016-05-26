@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 VERSION="1.6.2"
 DIST="linux"
-XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-GOROOT="$XDG_CACHE_HOME/go/${VERSION}"
-TMPDIR="$XDG_CACHE_HOME/gosetup"
+BASE="$HOME/.local"
+GOROOT="$BASE/go/${VERSION}"
+TMPDIR="$BASE/gosetup"
 
 if [[ ! -d "$GOROOT" ]]; then
   mkdir -p "$(dirname $GOROOT)"
@@ -29,7 +29,7 @@ if [[ ! -d "$GOROOT" ]]; then
     mv "$TMPDIR/go" "$GOROOT"
   fi
 
-  # rm -rf "$TMPDIR"
+  rm -rf "$TMPDIR"
 fi
 
 cat <<EOF >> zsh/_setup_zshenv.zsh
