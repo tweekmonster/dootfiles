@@ -3,6 +3,8 @@ script_base=$(dirname "${${(%):-%N}:A}")
 export DOTFILES=$(dirname "$script_base")
 export HOMEBREW_NO_ANALYTICS=1
 
+export PYTHON_CONFIGURE_OPTS="--enable-shared"
+
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
@@ -46,7 +48,7 @@ if [[ -z $ZSHENV_INIT ]]; then
     export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
   fi
 
-  export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.npm/bin:$PATH"
+  export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.local/npm/bin:$PATH"
 fi
 
 # Ensure python virtualenv is activated if $VIRTUAL_ENV is set
