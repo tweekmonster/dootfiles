@@ -1,11 +1,15 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import os
 import sys
 import shutil
 import logging
 import subprocess
-from urllib.error import HTTPError
-from urllib.request import urlopen
+
+try:
+    from urllib.error import HTTPError
+    from urllib.request import urlopen
+except ImportError:
+    from urllib2 import urlopen, HTTPError
 
 # Target destination.  Will be $HOME when not testing
 TARGET = os.path.expanduser('~')
@@ -32,7 +36,7 @@ class LogColorFormatter(logging.Formatter):
     }
 
     def __init__(self):
-        super(LogColorFormatter, self).__init__('{message}', style='{')
+        super(LogColorFormatter, self).__init__('%(message)s')
 
     def format(self, record):
         msg = super(LogColorFormatter, self).format(record)
@@ -72,10 +76,10 @@ def link_directory(src, dst, excludes=None):
 
 def download(url, dst):
     try:
-        with urlopen(url) as response:
-            with open(dst, 'wb') as fp:
-                fp.write(response.read())
-                log.info('Downloaded: %s -> %s', url, dst)
+        response = urlopen(url)
+        with open(dst, 'wb') as fp:
+            fp.write(response.read())
+            log.info('Downloaded: %s -> %s', url, dst)
     except HTTPError as e:
         raise InstallError('Could not download %s: %d - %s', url, e.code,
                            e.reason)
@@ -85,6 +89,10 @@ def run(command, env=None):
     s_env = os.environ.copy()
     if isinstance(env, dict):
         s_env.update(env)
+    path = s_env.get('PATH', '')
+    # Add some initial paths
+    path = '~/.linuxbrew/bin:/usr/local/bin:%s' % path
+    s_env['PATH'] = os.path.expanduser(path)
     log.warn('Running: %s', command)
     p = subprocess.Popen(command, stdout=sys.stdout, stderr=sys.stderr,
                          shell=True, env=s_env)
