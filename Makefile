@@ -9,8 +9,11 @@ install: ## Install dotfiles
 	@scripts/chsh.sh
 	@./install
 	@rm -f $(ZPLUG_HOME)/.cache
-	@rehash
-	@echo "log back in to ensure changes take effect"
+	@touch $(HOME)/.dootfiles_install
+	@echo
+	@echo
+	@echo "Run \033[1;36mexec zsh -l\033[0m to replace your login session"
+	@echo
 
 clean-links:  ## Removes symlinks
 	@scripts/clean-links.sh "$(HOME)" "$(PWD)"
