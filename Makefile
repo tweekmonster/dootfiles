@@ -12,7 +12,7 @@ install: ## Install dotfiles
 	@echo "log back in to ensure changes take effect"
 
 clean-links:  ## Removes symlinks
-	find $(HOME) -type l -lname "$(PWD)/*" -delete
+	@scripts/clean-links.sh "$(HOME)" "$(PWD)"
 
 clean-old-links:  ## Removes old dotfiles symlinks
-	find $(HOME) -type l -lname "$(HOME)/dotfiles/*" -delete
+	@scripts/clean-links.sh "$(HOME)" "$(HOME)/dotfiles"
