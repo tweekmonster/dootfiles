@@ -35,6 +35,7 @@ fi
 
 source "$script_base/include/aliases.zsh"
 source "$script_base/include/keyboard.zsh"
+source "$script_base/include/edit-command.zsh"
 source "$script_base/include/django-completions.zsh"
 
 # Let a local .zshrc override
