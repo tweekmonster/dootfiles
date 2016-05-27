@@ -33,10 +33,19 @@ else
   zplug load --verbose
 fi
 
-source "$script_base/include/aliases.zsh"
-source "$script_base/include/keyboard.zsh"
-source "$script_base/include/edit-command.zsh"
-source "$script_base/include/django-completions.zsh"
+sources=(
+'aliases'
+'keyboard'
+'edit-command'
+'django-completions'
+'less'
+)
+
+for s in "${sources[@]}"; do
+  source "$script_base/include/${s}.zsh"
+done
+
+unset s sources
 
 # Let a local .zshrc override
 [[ -e "$HOME/.zshrc_local" ]] && source "$HOME/.zshrc_local"

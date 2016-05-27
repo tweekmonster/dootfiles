@@ -38,16 +38,28 @@ setup_envs() {
     pyenv virtualenv 3.4.4 neovim3
   fi
 
+  if [ ! -e "$PYENV_ROOT/versions/shell-utils" ]; then
+    pyenv virtualenv 3.4.4 shell-utils
+  fi
+
   pyenv activate neovim2
   pip install -q -U pip neovim
   local py2=$("$PYENV_ROOT/bin/pyenv" which python)
   pyenv deactivate
 
   pyenv activate neovim3
-  pip install -q -U pip neovim flake8 isort
-  ln -s "$VIRTUAL_ENV/bin/flake8" "$HOME/bin/flake8" 2>/dev/null
-  ln -s "$VIRTUAL_ENV/bin/isort" "$HOME/bin/isort" 2>/dev/null
+  pip install -q -U pip neovim
   local py3=$("$PYENV_ROOT/bin/pyenv" which python)
+  pyenv deactivate
+
+  # Shell utlities
+  pyenv activate shell-utils
+  packages=("flake8" "isort" "pygments")
+  links=("flake8" "isort" "pygmentize")
+  pip install -q -U pip "${packages[@]}"
+  for link in "${links[@]}"; do
+    ln -fs "$VIRTUAL_ENV/bin/$link" "$HOME/bin/$link"
+  done
   pyenv deactivate
 
   local vimrc="$HOME/.vimrc_local"
