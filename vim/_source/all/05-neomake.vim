@@ -15,4 +15,5 @@ let g:neomake_python_flake8_maker = {
 augroup vimrc_neomake
   autocmd!
   autocmd BufWritePost * silent Neomake
+  autocmd QuitPre * let g:neomake_verbose = 0
 augroup END
