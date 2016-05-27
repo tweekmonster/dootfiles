@@ -1,6 +1,7 @@
 export ZPLUG_HOME="$HOME/.local/zplug"
 source "$ZPLUG_HOME/init.zsh"
 setopt hist_ignore_all_dups
+unsetopt correct_all
 setopt correct
 
 script_base=$(dirname "${${(%):-%N}:A}")

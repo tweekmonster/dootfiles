@@ -14,8 +14,6 @@ if [[ -n $TMUX && $TERM =~ 'xterm' ]]; then
   alias htop='TERM=screen-256color htop'
 fi
 
-setopt correct_all
-
 # Snatched from oh-my-zsh, except with the -F flag
 # Find the option for using colors in ls, depending on the version: Linux or BSD
 if [[ "$(uname -s)" == "NetBSD" ]]; then
