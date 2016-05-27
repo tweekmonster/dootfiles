@@ -9,6 +9,7 @@ install: ## Install dotfiles
 	@scripts/chsh.sh
 	@./install
 	@rm -f $(ZPLUG_HOME)/.cache
+	@rehash
 	@echo "log back in to ensure changes take effect"
 
 clean-links:  ## Removes symlinks
