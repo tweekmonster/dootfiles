@@ -70,3 +70,5 @@ if [[ -e "$HOME/.dootfiles_install" ]]; then
   rm -f "$HOME/.dootfiles_install"
   hash -rf
 fi
+
+unset script_base

@@ -75,3 +75,5 @@ source "$script_base/include/pyenv.zsh"
 [[ -e "$script_base/_setup_zshenv.zsh" ]] && source "$script_base/_setup_zshenv.zsh"
 
 [[ -e "$HOME/.zshenv_local" ]] && source "$HOME/.zshenv_local"
+
+unset script_base
