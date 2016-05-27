@@ -1,1 +1,1 @@
-autocmd! FileType zshrc,*.zsh,*.zsh-theme set filetype=zsh
+autocmd! BufRead,BufNewFile zshrc,*.zsh,*.zsh-theme set filetype=zsh
