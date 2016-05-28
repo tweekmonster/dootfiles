@@ -1,8 +1,6 @@
-export LESS=' -R '
+export LESS=' -csR '
 
 function hl() {
-  # Don't set LESSOPEN globally since less could be used on very large files,
-  # defeating less's ability to view them quickly.
   # pygmentize needs to be installed, otherwise just use plain less.
   if (( ! $+commands[pygmentize] )); then
     less "$1"
@@ -19,5 +17,17 @@ function hl() {
     return 1
   fi
 
-  env LESSOPEN="| pygmentize -g -f terminal -l ${1:e} %s" less "$1"
+  pygmentize -g -f terminal "$1" | less
+}
+
+man() {
+  env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[38;5;229m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[48;5;48;38;5;16m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[4;38;5;216m' \
+    _NROFF_U=1 \
+    man "$@"
 }
