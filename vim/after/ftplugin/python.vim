@@ -1,4 +1,5 @@
 let g:python_highlight_all = 1
+let g:braceless_generate_scripts = 1
 let b:delimitMate_nesting_quotes = ['"', "'"]
 
 setlocal completeopt-=preview
