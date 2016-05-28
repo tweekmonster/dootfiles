@@ -1,5 +1,4 @@
-cnoremap <up> <c-f>
-cnoremap <c-p> <c-f>
+cnoremap <c-p> <up>
 
 function! s:setup() abort
   nnoremap <buffer> <c-p> k
