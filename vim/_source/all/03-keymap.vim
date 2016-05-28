@@ -111,3 +111,6 @@ function! s:append_mode_line()
 endfunction
 
 nnoremap <silent> <leader>ml :call <sid>append_mode_line()<cr>
+
+" dotfiles vim config editing
+nnoremap <localleader>v :<c-u>execute 'Files '.expand('$DOTFILES/vim')<cr>
