@@ -71,6 +71,7 @@ let g:python3_host_prog = '$py3'
 EOF
 
   cat <<EOF >> zsh/_setup_zshenv.zsh
+export PYENV_ROOT="$PYENV_ROOT"
 export PATH="$PYENV_ROOT/bin:\$PATH"
 EOF
 
