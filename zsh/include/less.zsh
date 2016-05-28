@@ -31,3 +31,7 @@ man() {
     _NROFF_U=1 \
     man "$@"
 }
+
+if [[ ! -f "$HOME/.less" ]] && (( $+commands[lesskey] )); then
+  lesskey "$DOTFILES/misc/lesskey"
+fi
