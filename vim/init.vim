@@ -34,13 +34,16 @@ call s:source('all')
 
 if has('nvim')
   call s:source('nvim')
+  if filereadable(g:_vimrc_base.'/.python.vim')
+    execute 'source '.g:_vimrc_base.'/.python.vim'
+  endif
 else
   call s:source('vim')
 endif
 
 let s:vimrc_local = expand('$HOME/.vimrc_local')
 if filereadable(s:vimrc_local)
-  exec 'source '.s:vimrc_local
+  execute 'source '.s:vimrc_local
 endif
 
 if !g:_vimrc_init

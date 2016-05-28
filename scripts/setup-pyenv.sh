@@ -62,10 +62,10 @@ setup_envs() {
   done
   pyenv deactivate
 
-  local vimrc="$HOME/.vimrc_local"
-  local contents=$(cat "$vimrc")
-  [[ -e "$vimrc" ]] && echo "$contents" | awk '!/g:python3?_host_prog/' > "$vimrc"
-  cat <<EOF >> "$vimrc"
+  local nvim_python="$HOME/.config/nvim/.python.vim"
+  mkdir -p "$(dirname $nvim_python)"
+  cat <<EOF > "$nvim_python"
+" This is generated.  Do not edit.
 let g:python_host_prog = '$py2'
 let g:python3_host_prog = '$py3'
 EOF
