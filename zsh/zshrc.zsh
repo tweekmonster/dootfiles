@@ -71,4 +71,5 @@ if [[ -e "$HOME/.dootfiles_install" ]]; then
   hash -rf
 fi
 
+[[ -e "$script_base/_setup_zshrc.zsh" ]] && source "$script_base/_setup_zshrc.zsh"
 unset script_base

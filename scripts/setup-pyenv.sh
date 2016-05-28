@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT="$HOME/.local/pyenv"
 
 install_pyenv() {
   if [[ "$(uname)" == "Darwin" ]]; then
@@ -16,7 +16,7 @@ install_pyenv() {
 }
 
 setup_envs() {
-  export PATH="$HOME/.pyenv/bin:$PATH"
+  export PATH="$PYENV_ROOT/bin:$PATH"
   export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
   eval "$($PYENV_ROOT/bin/pyenv init -)"
@@ -68,6 +68,15 @@ setup_envs() {
   cat <<EOF >> "$vimrc"
 let g:python_host_prog = '$py2'
 let g:python3_host_prog = '$py3'
+EOF
+
+  cat <<EOF >> zsh/_setup_zshenv.zsh
+export PATH="$PYENV_ROOT/bin:\$PATH"
+EOF
+
+  cat <<EOF >> zsh/_setup_zshrc.zsh
+eval "\$(pyenv init -)"
+eval "\$(pyenv virtualenv-init -)"
 EOF
 }
 

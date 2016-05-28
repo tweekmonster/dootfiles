@@ -31,16 +31,15 @@ check_directories() {
   done
 }
 
-check_directories \
-  "$HOME/.ssh" \
-  "$XDG_CONFIG_HOME" \
-  "$XDG_CACHE_HOME" \
-  "$XDG_DATA_HOME" \
-  "$XDG_RUNTIME_DIR"
-
-
 if [[ -z $ZSHENV_INIT ]]; then
   export ZSHENV_INIT=1
+
+  check_directories \
+    "$HOME/.ssh" \
+    "$XDG_CONFIG_HOME" \
+    "$XDG_CACHE_HOME" \
+    "$XDG_DATA_HOME" \
+    "$XDG_RUNTIME_DIR"
 
   if [[ -d "$HOME/.linuxbrew" ]]; then
     PATH="$HOME/.linuxbrew/bin:$PATH"
@@ -69,11 +68,7 @@ else
   export EDITOR=vim
 fi
 
-
-source "$script_base/include/pyenv.zsh"
-
 [[ -e "$script_base/_setup_zshenv.zsh" ]] && source "$script_base/_setup_zshenv.zsh"
-
 [[ -e "$HOME/.zshenv_local" ]] && source "$HOME/.zshenv_local"
 
 unset script_base
