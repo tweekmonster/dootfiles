@@ -1,5 +1,4 @@
 script_base=$(dirname "${${(%):-%N}:A}")
-
 export DOTFILES=$(dirname "$script_base")
 export HOMEBREW_NO_ANALYTICS=1
 
@@ -9,6 +8,9 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp/$USER}"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$ZDOTDIR/.zsh_history"
+export ZPLUG_HOME="$XDG_CONFIG_HOME/zplug"
 
 check_directories() {
   # Always create XDG_* directories and ensure they're accessible only to the
@@ -70,5 +72,4 @@ fi
 
 [[ -e "$script_base/_setup_zshenv.zsh" ]] && source "$script_base/_setup_zshenv.zsh"
 [[ -e "$HOME/.zshenv_local" ]] && source "$HOME/.zshenv_local"
-
 unset script_base

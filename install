@@ -93,6 +93,7 @@ def run(command, env=None):
     # Add some initial paths
     path = '~/.linuxbrew/bin:/usr/local/bin:%s' % path
     s_env['PATH'] = os.path.expanduser(path)
+    s_env = {k: v for k, v in s_env.items() if not k.startswith('ZPLUG_')}
     log.warn('Running: %s', command)
     p = subprocess.Popen(command, stdout=sys.stdout, stderr=sys.stderr,
                          shell=True, env=s_env)
@@ -126,12 +127,16 @@ def install_vim():
 
 
 def install_zsh():
-    zplug = os.path.join(TARGET, '.local', 'zplug')
+    zplug = os.path.join(CONFIG, 'zplug')
     if not os.path.isdir(zplug):
         run('curl -L get.zplug.sh | env ZPLUG_HOME="%s" zsh' % zplug)
-    link('zsh/zshrc.zsh', '.zshrc')
+    zdotdir = os.path.join(CONFIG, 'zsh')
+    mkdir(zdotdir)
+    link('zsh/zshrc.zsh', os.path.join(zdotdir, '.zshrc'))
     link('zsh/zshenv.zsh', '.zshenv')
-    run('zsh -c "source %s/.zshrc"' % TARGET, {'DOTFILES_SETUP': '1'})
+    run('zsh -c "source ~/.zshenv && source %s/.zshrc"' % zdotdir, {
+        'DOTFILES_SETUP': '1',
+    })
 
 
 def install():

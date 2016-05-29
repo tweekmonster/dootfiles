@@ -1,4 +1,4 @@
-ZPLUG_HOME = $(HOME)/.local/zplug
+ZPLUG_HOME = $(HOME)/.config/zplug
 
 .PHONY: help install clean
 
