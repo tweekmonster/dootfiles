@@ -39,6 +39,7 @@ sources=(
 'edit-command'
 'django-completions'
 'less'
+'dootfiles'
 )
 
 for s in "${sources[@]}"; do
