@@ -62,14 +62,14 @@ if [[ -d "$fzf_path" ]]; then
   source "$fzf_path/shell/key-bindings.zsh"
 fi
 
-# Ensure that the user bin directories are the first in PATH.  This results in
-# duplicates.  It's okay.
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
 if [[ -e "$HOME/.dootfiles_install" ]]; then
   rm -f "$HOME/.dootfiles_install"
   hash -rf
 fi
 
 [[ -e "$script_base/_setup_zshrc.zsh" ]] && source "$script_base/_setup_zshrc.zsh"
+
+# Ensure that the user bin directories are the first in PATH.  This results in
+# duplicates.  It's okay.
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 unset script_base
