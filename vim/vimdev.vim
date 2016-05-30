@@ -17,9 +17,16 @@ endfunction
 " This should be called just before plug#end().
 function! vimdev#scan() abort
   for name in s:dev_plugins()
-    if has_key(g:plugs, name) && isdirectory(g:_vimrc_dev_dir.'/'.name)
+    let devdir = g:_vimrc_dev_dir.'/'.name
+    if !isdirectory(devdir)
+      continue
+    endif
+
+    if has_key(g:plugs, name)
       call remove(g:plugs[name], 'uri')
       let g:plugs[name]['dir'] = g:_vimrc_dev_dir.'/'.name
+    else
+      execute 'Plug '''.devdir.''''
     endif
   endfor
 endfunction
