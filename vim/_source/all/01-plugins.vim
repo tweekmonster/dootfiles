@@ -26,13 +26,17 @@ call s:load_bundles()
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/deoplete.nvim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim'
+endif
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-vim'
 
 " Shougo - Deoplete
-Plug 'carlitux/deoplete-ternjs'
-Plug 'zchee/deoplete-jedi'
+if has('nvim')
+  Plug 'carlitux/deoplete-ternjs'
+  Plug 'zchee/deoplete-jedi'
+endif
 
 " junegunn
 Plug 'junegunn/fzf', {'do': './install --bin'}

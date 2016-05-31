@@ -3,7 +3,7 @@ if has('vim_starting')
   set encoding=utf-8
 endif
 
-let g:_vimrc_base = expand('<sfile>:p:h')
+let g:_vimrc_base = $XDG_CONFIG_HOME.'/nvim'
 let g:_vimrc_plugins = g:_vimrc_base.'/plugins'
 let g:_vimrc_init = isdirectory(g:_vimrc_plugins)
 let g:_vimrc_dev_dir = expand('~/dev/vim')

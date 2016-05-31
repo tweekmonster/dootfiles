@@ -26,6 +26,9 @@ function! vimdev#scan() abort
       call remove(g:plugs[name], 'uri')
       let g:plugs[name]['dir'] = g:_vimrc_dev_dir.'/'.name
     else
+      if name =~# '\.nvim$' && !has('nvim')
+        continue
+      endif
       execute 'Plug '''.devdir.''''
     endif
   endfor

@@ -1,7 +1,10 @@
 set colorcolumn=80
 set completeopt+=menuone
-set completeopt+=noinsert
 set completeopt-=preview
+try
+  set completeopt+=noinsert
+catch
+endtry
 set concealcursor=nc
 set cursorline
 set hidden
