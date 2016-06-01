@@ -54,6 +54,7 @@ resolve() {
 }
 
 
+IFS=$'\n'
 for link in $(find "$1" -maxdepth 3 -type l); do
   target=$(resolve "$link")
   if [[ "${target##$2/}" != "$target" ]]; then
