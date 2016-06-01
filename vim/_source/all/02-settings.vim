@@ -15,6 +15,7 @@ set lazyredraw
 set modelines=5
 set mouse=a
 set mousemodel=extend
+set nofoldenable
 set noshowmode
 set nowrap
 set number
