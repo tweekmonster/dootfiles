@@ -19,4 +19,5 @@ augroup vimrc_annoying
 
   " This makes it so Python documentation buffers go away
   autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
+  autocmd BufWinEnter,SessionLoadPost * silent! %foldopen!
 augroup END
