@@ -81,7 +81,7 @@ vnoremap <silent> * :<C-U>
 " Visual range macros
 function! s:visual_range_macro()
   echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
+  execute ":'<,'>normal! @".nr2char(getchar())
 endfunction
 
 xnoremap @ :<C-u>call <sid>visual_range_macro()<CR>
