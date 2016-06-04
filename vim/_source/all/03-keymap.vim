@@ -72,11 +72,20 @@ nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile
 nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 
 " Visual * search
-vnoremap <silent> * :<C-U>
-      \ let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-      \ gvy/<C-R><C-R>=substitute(
-      \ escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-      \ gV:call setreg('"', old_reg, old_regtype)<CR>
+function! s:visual_word() abort
+  let view = winsaveview()
+  let old_r = getreg('"')
+  let old_rt = getregtype('"')
+  normal! gvy
+  let @/ = substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')
+  normal! //<cr>N
+  call setreg('"', old_r, old_rt)
+  call winrestview(view)
+endfunction
+
+nnoremap * *N
+nnoremap # #N
+vnoremap <silent> * :<c-u>call <sid>visual_word()<cr>
 
 " Visual range macros
 function! s:visual_range_macro()
