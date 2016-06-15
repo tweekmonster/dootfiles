@@ -1,11 +1,11 @@
 " Removes the search highlight on insert mode and restores it in normal mode
 function! s:toggle_highlight()
-  if exists('b:last_hlsearch')
-    let &l:hlsearch = b:last_hlsearch
-    unlet b:last_hlsearch
-  elseif &l:hlsearch
-    let b:last_hlsearch = &l:hlsearch
-    setlocal nohlsearch
+  if exists('b:_last_search')
+    let @/ = b:_last_search
+    unlet b:_last_search
+  else
+    let b:_last_search = @/
+    let @/ = ''
   endif
 endfunction
 
