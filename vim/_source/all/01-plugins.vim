@@ -95,6 +95,7 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'wellle/targets.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/BufOnly.vim'
+Plug 'dhruvasagar/vim-table-mode'
 
 " Web Development
 Plug 'fatih/vim-nginx'
