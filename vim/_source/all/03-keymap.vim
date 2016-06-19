@@ -71,21 +71,18 @@ nnoremap <silent> <leader>q :<c-u>call <sid>delete_buffer()<cr>
 nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
 nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 
-" Visual * search
-function! s:visual_word() abort
-  let view = winsaveview()
-  let old_r = getreg('"')
-  let old_rt = getregtype('"')
-  normal! gvy
-  let @/ = substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')
-  normal! //<cr>N
-  call setreg('"', old_r, old_rt)
-  call winrestview(view)
-endfunction
-
-nnoremap * *N
-nnoremap # #N
-vnoremap <silent> * :<c-u>call <sid>visual_word()<cr>
+nnoremap * :<c-u>let vsave=winsaveview()<cr>
+      \ h*N
+      \ :<c-u>call winrestview(vsave)<cr>
+      \ :<c-u>unlet! vsave<cr>N
+nnoremap # :<c-u>let vsave=winsaveview()<cr>
+      \ h#N
+      \ :<c-u>call winrestview(vsave)<cr>
+      \ :<c-u>unlet! vsave<cr>N
+vnoremap <silent> * "vy:<c-u>let vsave=winsaveview()<cr>
+      \ /<c-r>=substitute(escape(@v, '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<cr><cr>N
+      \ :<c-u>call winrestview(vsave)<cr>
+      \ :<c-u>unlet! vsave<cr>N
 
 " Visual range macros
 function! s:visual_range_macro()
