@@ -119,6 +119,8 @@ Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'JulesWang/css.vim'
+Plug 'cakebaker/scss-syntax.vim'
 
 " Scan for development replacements before plug#end()
 call vimdev#scan()
