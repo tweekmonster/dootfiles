@@ -54,7 +54,8 @@ let s:backup_dir .= '//'  " Store backups in a full path
 exec 'set backupdir=' . s:backup_dir . ' directory=' . s:backup_dir
 set backupskip=/tmp/*,/private/tmp/*
 set writebackup
-set viminfo='100,<50,:20
+set history=10000
+set viminfo='100,<50
 
 set undofile
 let s:undo_dir = expand('~/.cache/vim_undo')
