@@ -13,7 +13,7 @@ if exists(':ImpSort')
 
   if impsort#is_sorted()
     ImpSortAuto!
-  else
+  elseif !exists('SessionLoad')
     echohl WarningMsg
     echo 'ImpSortAuto not enabled because imports are not sorted'
     echohl None
