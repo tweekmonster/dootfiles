@@ -64,6 +64,7 @@ Plug 'tweekmonster/sshclip', {'do': './bin/sshclip-client --impersonate sshclip'
 " Theming
 Plug 'bling/vim-airline'
 Plug 'ryanoasis/vim-devicons'
+Plug 'ap/vim-buftabline'
 
 " Project Related
 Plug 'benekastah/neomake'
@@ -82,6 +83,7 @@ endif
 " Utilities
 Plug 'FooSoft/vim-argwrap'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'haya14busa/incsearch.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'chrisbra/NrrwRgn'
 Plug 'christoomey/vim-tmux-navigator'
@@ -96,6 +98,7 @@ Plug 'wellle/targets.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'PeterRincker/vim-argumentative'
 
 " Web Development
 Plug 'fatih/vim-nginx'
