@@ -24,12 +24,8 @@ set splitbelow
 set splitright
 set wildmenu
 
-try
-  colorscheme base16_custom
-catch
-endtry
-
 if !has('nvim')
+  set t_Co=256
   set ttyfast
   if &term =~ '^screen'
     set ttymouse=xterm2
