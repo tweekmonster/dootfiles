@@ -38,10 +38,6 @@ nnoremap k gk
 
 imap <Nul> <Space>
 
-" No idea what's causing it, but pressing <esc> leads to a delay, possibly
-" waiting for more keys.  I'm not having it.
-inoremap <nowait> <esc> <esc>
-
 " Highlight last inserted text
 nnoremap gV `[v`]
 
