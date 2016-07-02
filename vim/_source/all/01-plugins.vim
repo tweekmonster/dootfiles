@@ -44,6 +44,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vader.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/gv.vim'
 
 " tpope
 Plug 'tpope/vim-fugitive'
@@ -99,6 +100,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'PeterRincker/vim-argumentative'
+Plug 'godlygeek/tabular'
 
 " Web Development
 Plug 'fatih/vim-nginx'
