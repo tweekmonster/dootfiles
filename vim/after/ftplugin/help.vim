@@ -1,3 +1,8 @@
+if &l:buftype == 'help'
+  nnoremap <silent><buffer> <c-p> :Helptags<cr>
+  finish
+endif
+
 setlocal noexpandtab
 setlocal textwidth=78
 setlocal colorcolumn=78

@@ -10,8 +10,3 @@ nnoremap <leader>e :BTags<cr>
 nnoremap <leader>E :BLines<cr>
 nnoremap <leader>L :Lines<cr>
 nnoremap <leader>B :Buffers<cr>
-
-augroup vimrc_fzf
-  autocmd!
-  autocmd FileType help nmap <buffer> <c-p> :Helptags<cr>
-augroup END
