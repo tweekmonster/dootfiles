@@ -1,14 +1,17 @@
-if &l:buftype == 'help'
+setlocal noexpandtab
+setlocal textwidth=78
+setlocal colorcolumn=78
+setlocal tabstop=8
+setlocal shiftwidth=8
+
+if &l:buftype == 'help' || expand('%') =~# '^'.$VIMRUNTIME
+      \ || expand('%') =~# '^'.g:_vimrc_plugins
+  nnoremap <buffer> q :<c-u>q<cr>
   nnoremap <silent><buffer> <c-p> :Helptags<cr>
   finish
 endif
 
-setlocal noexpandtab
-setlocal textwidth=78
-setlocal colorcolumn=78
 setlocal formatexpr=HelpFormatExpr()
-setlocal tabstop=8
-setlocal shiftwidth=8
 
 nnoremap <silent><buffer> <leader>r :<c-u>call <sid>right_align()<cr>
 nnoremap <silent><buffer> <leader>ml maGovim:tw=78:ts=8:noet:ft=help:norl:<esc>`a
