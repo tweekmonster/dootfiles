@@ -166,6 +166,8 @@ def install():
     link('misc/editorconfig', '.editorconfig')
     link('misc/inputrc', '.inputrc')
     link('misc/npmrc', '.npmrc')
+    link('misc/pdbrc', '.pdbrc')
+    link('misc/pythonrc.py', os.path.join(CONFIG, 'pythonrc.py'))
 
     link('bin/dev-layout.sh', 'bin/dev-layout')
     link('tmux/tmux.conf', '.tmux.conf')

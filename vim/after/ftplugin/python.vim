@@ -6,6 +6,18 @@ setlocal shiftwidth=4
 setlocal tabstop=4
 setlocal softtabstop=4
 
+function! s:set_pdb() abort
+  if getline('.') !~# '^\s*import i\?pdb'
+    normal! oimport pdb; pdb.set_trace()
+  else
+    delete _
+  endif
+endfunction
+
+nnoremap <buffer> <localleader>d :<c-u>call <sid>set_pdb()<cr>
+nnoremap <buffer> <localleader>D :<c-u>g/^\s*import i\?pdb/delete _<cr>
+
+
 BracelessEnable +indent +fold-inner +highlight-cc2
 
 if exists(':ImpSort')

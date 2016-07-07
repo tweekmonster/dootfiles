@@ -12,6 +12,8 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export HISTFILE="$ZDOTDIR/.zsh_history"
 export ZPLUG_HOME="$XDG_CONFIG_HOME/zplug"
 
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc.py"
+
 check_directories() {
   # Always create XDG_* directories and ensure they're accessible only to the
   # user.
