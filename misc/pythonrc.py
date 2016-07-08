@@ -20,7 +20,7 @@ try:
     env['PYTHONPATH'] = site.USER_SITE
     print('Replacing with IPython...')
     os.execve(sys.executable,
-              env, (os.path.basename(sys.executable), '-m', 'IPython'))
+              (os.path.basename(sys.executable), '-m', 'IPython'), env)
 except ImportError:
     """Fallback to the plain REPL."""
     import readline
