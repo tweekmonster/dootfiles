@@ -46,14 +46,19 @@ function! s:hl_matching_lines() abort
   endif
 
   if len(lines)
-    " Highlight the matching lines using the \%l atom.  The `MatchLine`
-    " highlight group is used.
-    "
     " Since the current line is not in the `lines` list, only the other
     " lines are highlighted.  If you want to highlight the current line as
     " well:
     " call add(lines, view.lnum)
-    call matchadd('MatchLine', join(map(lines, '''\%''.v:val.''l'''), '\|'), 0, 12345)
+    if exists('*matchaddpos')
+      " If matchaddpos() is availble, use it to highlight the lines since it's
+      " faster than using a pattern in matchadd().
+      call matchaddpos('MatchLine', lines, 0, 12345)
+    else
+      " Highlight the matching lines using the \%l atom.  The `MatchLine`
+      " highlight group is used.
+      call matchadd('MatchLine', join(map(lines, '''\%''.v:val.''l'''), '\|'), 0, 12345)
+    endif
   endif
 
   " Restore the window's state.
@@ -73,9 +78,9 @@ highlight default link MatchLine MatchParen
 augroup matching_lines
   autocmd!
   " Highlight lines as the cursor moves.
-  " autocmd CursorMoved * call s:hl_matching_lines()
+  autocmd CursorMoved * call s:hl_matching_lines()
   " Remove the highlight while in insert mode.
-  " autocmd InsertEnter * call s:hl_matching_lines_clear()
+  autocmd InsertEnter * call s:hl_matching_lines_clear()
   " Remove the highlight after TextChanged.
   autocmd TextChanged,TextChangedI * call s:hl_matching_lines_clear()
 augroup END
