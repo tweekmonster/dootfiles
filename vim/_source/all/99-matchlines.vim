@@ -18,20 +18,20 @@ function! s:get_match_lines(line) abort
 endfunction
 
 function! s:hl_matching_lines() abort
-  " b:last_line prevents running the script again while the cursor is
-  " moved on the same line.  Otherwise, the cursor won't move if the
-  " current line has matching pairs of something.
-  if exists('b:last_line') && b:last_line == line('.')
+  " `b:hl_last_line` prevents running the script again while the cursor is
+  " moved on the same line.  Otherwise, the cursor won't move if the current
+  " line has matching pairs of something.
+  if exists('b:hl_last_line') && b:hl_last_line == line('.')
     return
   endif
 
-  let b:last_line = line('.')
+  let b:hl_last_line = line('.')
 
   " Save the window's state.
   let view = winsaveview()
 
-  " Delete a previous match highlight.  `12345` is used for the match ID
-  " and can be anything as long as it's unique.
+  " Delete a previous match highlight.  `12345` is used for the match ID.
+  " It can be anything as long as it's unique.
   silent! call matchdelete(12345)
 
   " Try to get matching lines from the current cursor position.
@@ -60,17 +60,24 @@ function! s:hl_matching_lines() abort
   call winrestview(view)
 endfunction
 
+function! s:hl_matching_lines_clear() abort
+  silent! call matchdelete(12345)
+  unlet! b:hl_last_line
+endfunction
+
 
 " The highlight group that's used for highlighting matched lines.  By
 " default, it will be the same as the `MatchParen` group.
 highlight default link MatchLine MatchParen
 
-" augroup matching_lines
-"   autocmd!
-"   " Highlight lines as the cursor moves.
-"   autocmd CursorMoved * call s:hl_matching_lines()
-"   " Remove the highlight while in insert mode.
-"   autocmd InsertEnter * silent! call matchdelete(12345)
-" augroup END
+augroup matching_lines
+  autocmd!
+  " Highlight lines as the cursor moves.
+  " autocmd CursorMoved * call s:hl_matching_lines()
+  " Remove the highlight while in insert mode.
+  " autocmd InsertEnter * call s:hl_matching_lines_clear()
+  " Remove the highlight after TextChanged.
+  autocmd TextChanged,TextChangedI * call s:hl_matching_lines_clear()
+augroup END
 
 nnoremap <silent> <leader>l :<c-u>call <sid>hl_matching_lines()<cr>
