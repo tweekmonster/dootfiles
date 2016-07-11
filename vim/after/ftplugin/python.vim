@@ -5,6 +5,7 @@ setlocal textwidth=79
 setlocal shiftwidth=4
 setlocal tabstop=4
 setlocal softtabstop=4
+setlocal formatoptions-=t
 
 function! s:set_pdb() abort
   if getline('.') !~# '^\s*import i\?pdb'
