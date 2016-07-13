@@ -1,4 +1,8 @@
 " Used as an answer at: http://vi.stackexchange.com/q/8692/5229
+" Turned into a plugin: https://github.com/tweekmonster/spellrotate.vim
+" Kept here for posterity
+
+finish
 
 function! s:spell_rotate(dir, visual) abort
   if a:visual

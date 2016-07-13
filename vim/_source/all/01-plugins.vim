@@ -61,6 +61,7 @@ Plug 'tpope/vim-scriptease'
 Plug 'tweekmonster/fzf-filemru'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/sshclip', {'do': './bin/sshclip-client --impersonate sshclip'}
+Plug 'tweekmonster/spellrotate.vim'
 
 " Theming
 Plug 'bling/vim-airline'
