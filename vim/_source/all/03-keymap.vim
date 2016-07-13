@@ -32,10 +32,6 @@ inoremap <expr> jk col('.') == 1 ? '<esc>' : '<esc>l'
 imap JK jk
 imap Jk jk
 
-" Navigate lines as shown on the screen
-nnoremap j gj
-nnoremap k gk
-
 imap <Nul> <Space>
 
 " Highlight last inserted text
