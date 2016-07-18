@@ -102,6 +102,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-grepper'
 Plug 'AndrewRadev/sideways.vim'
+Plug 'majutsushi/tagbar'
 
 " Web Development
 Plug 'fatih/vim-nginx'
