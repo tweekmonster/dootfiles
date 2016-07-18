@@ -36,6 +36,7 @@ Plug 'Shougo/neco-vim'
 if has('nvim')
   Plug 'carlitux/deoplete-ternjs'
   Plug 'zchee/deoplete-jedi'
+  Plug 'zchee/deoplete-clang'
 endif
 
 " junegunn
@@ -62,6 +63,11 @@ Plug 'tweekmonster/fzf-filemru'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/sshclip', {'do': './bin/sshclip-client --impersonate sshclip'}
 Plug 'tweekmonster/spellrotate.vim'
+Plug 'tweekmonster/django-plus.vim'
+Plug 'tweekmonster/headlines.vim'
+Plug 'tweekmonster/impsort.vim'
+Plug 'tweekmonster/wstrip.vim'
+Plug 'tweekmonster/dyslexic.vim'
 
 " Theming
 Plug 'bling/vim-airline'
@@ -90,7 +96,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'chrisbra/NrrwRgn'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'edsono/vim-matchit'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-user'
 Plug 'michaeljsmith/vim-indent-object'
@@ -99,7 +104,6 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-grepper'
 Plug 'AndrewRadev/sideways.vim'
 Plug 'majutsushi/tagbar'
