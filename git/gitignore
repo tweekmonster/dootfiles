@@ -4,6 +4,8 @@ musings/
 .python-version
 .venv
 .vimroot
+.nvimrc
+.vimrc
 
 
 ### OSX ###
