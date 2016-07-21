@@ -74,6 +74,16 @@ def link_directory(src, dst, excludes=None):
         link(os.path.join(src, filename), os.path.join(dst, filename))
 
 
+def link_scripts(strip_ext):
+    """Links bin/ scripts with optionally stripped extensions."""
+    for script in os.listdir(os.path.join(BASE, 'bin')):
+        script = os.path.join('bin', script)
+        link_script, ext = os.path.splitext(script)
+        if ext not in strip_ext:
+            link_script = script
+        link(script, link_script)
+
+
 def download(url, dst):
     try:
         response = urlopen(url)
@@ -169,8 +179,9 @@ def install():
     link('misc/pdbrc', '.pdbrc')
     link('misc/pythonrc.py', os.path.join(CONFIG, 'pythonrc.py'))
 
-    link('bin/dev-layout.sh', 'bin/dev-layout')
     link('tmux/tmux.conf', '.tmux.conf')
+
+    link_scripts(('.sh', '.py'))
 
     run('scripts/gen-terminfo.sh')
     run('scripts/setup-debian.sh')
