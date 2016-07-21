@@ -4,8 +4,3 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 set termguicolors
 
 execute 'set viminfo+=n'.g:_vimrc_base.'/nviminfo'
-
-augroup vimrc_nvim
-  autocmd!
-  autocmd TermOpen * setlocal nospell
-augroup END

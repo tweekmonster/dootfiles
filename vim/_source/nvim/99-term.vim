@@ -1,5 +1,4 @@
-" Prevent the terminal from taking the window with it when it closes.  Uses a
-" separate function to avoid double execute quoting.
+" Prevent the terminal from taking the window with it when it closes.
 "
 " The last two screens worth of text is stored in register `t`
 function! s:termclose() abort
@@ -10,5 +9,6 @@ endfunction
 
 augroup vimrc_term
   autocmd!
-  execute 'autocmd TermClose *:'.$SHELL.' call s:termclose()'
+  autocmd TermOpen * setlocal nospell
+  autocmd TermClose *:$SHELL call s:termclose()
 augroup END
