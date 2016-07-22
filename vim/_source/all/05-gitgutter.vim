@@ -6,7 +6,7 @@ let g:gitgutter_override_sign_column_highlight = 0
 " Using the timer feature, the signs will be updated for the buffer the cursor
 " is in after the session script is done loading.
 function! s:gg(...) abort
-  if !a:0
+  if has('timers') && !a:0
     if exists('s:gg_timer')
       call timer_stop(s:gg_timer)
     endif
