@@ -23,6 +23,7 @@ call s:load_bundles()
 " easier to deal with.
 
 " Shougo
+Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
@@ -52,10 +53,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-scriptease'
 
 " My stuff
@@ -79,7 +78,6 @@ Plug 'benekastah/neomake'
 Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'editorconfig/editorconfig-vim'
 
 " Snippets
 Plug 'mattn/emmet-vim'
@@ -95,18 +93,16 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'chrisbra/NrrwRgn'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-user'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'tomtom/tcomment_vim'
-Plug 'vim-scripts/BufOnly.vim'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'tyru/caw.vim'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mhinz/vim-grepper'
 Plug 'AndrewRadev/sideways.vim'
 Plug 'majutsushi/tagbar'
+Plug 'nhooyr/neoman.vim'
 
 " Web Development
 Plug 'fatih/vim-nginx'
@@ -131,6 +127,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'JulesWang/css.vim'
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'justinmk/vim-syntax-extra'
 
 " Scan for development replacements before plug#end()
 call vimdev#scan()
