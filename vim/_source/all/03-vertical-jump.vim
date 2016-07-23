@@ -1,3 +1,18 @@
+function! s:getline(lnum, col) abort
+  let line = getline(a:lnum)
+  let i = 0
+  let c = 0
+  let maxc = min([strlen(line), a:col])
+  let out = ''
+  while c < maxc && i < maxc
+    let char = line[i]
+    let out .= char
+    let i += 1
+    let c += strdisplaywidth(char)
+  endwhile
+  return out
+endfunction
+
 " Jump to next non-blank line
 function! s:vert_jump(dir, by_col, visual) abort
   if a:visual
@@ -15,17 +30,18 @@ function! s:vert_jump(dir, by_col, visual) abort
   endif
 
   if !a:by_col
-    while c
+    while c && line
       let line = call(func, [line + a:dir])
       let c -= 1
     endwhile
   else
     let l = line
-    let ll = col('.')
+    let lc = col('.')
+    let vc = virtcol('.')
 
-    while c
+    while c && l
       let l = call(func, [line + a:dir])
-      while l && strlen(getline(l)) < ll
+      while l && (s:getline(l, lc) =~# '^\s*$' || strdisplaywidth(getline(l)) < vc)
         let l = call(func, [l + a:dir])
       endwhile
       let line = l
