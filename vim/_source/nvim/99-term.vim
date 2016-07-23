@@ -7,8 +7,33 @@ function! s:termclose() abort
   execute 'autocmd BufWinLeave <buffer> split' expand('#')
 endfunction
 
+function! s:tmuxnav(dir) abort
+  let b:_tmuxnav = 1
+  let buf = bufnr('%')
+  execute 'TmuxNavigate'.a:dir
+
+  if bufnr('%') == buf
+    " Buffer didn't actually change.
+    startinsert
+  endif
+endfunction
+
+function! s:termopen() abort
+  setlocal nospell
+  tnoremap <silent><buffer> <m-h> <c-\><c-n>:<c-u>call <sid>tmuxnav('Left')<cr>
+  tnoremap <silent><buffer> <m-j> <c-\><c-n>:<c-u>call <sid>tmuxnav('Down')<cr>
+  tnoremap <silent><buffer> <m-k> <c-\><c-n>:<c-u>call <sid>tmuxnav('Up')<cr>
+  tnoremap <silent><buffer> <m-l> <c-\><c-n>:<c-u>call <sid>tmuxnav('Right')<cr>
+
+  autocmd BufEnter <buffer>
+        \ if exists('b:_tmuxnav') |
+        \   unlet! b:_tmuxnav |
+        \   startinsert |
+        \ endif
+endfunction
+
 augroup vimrc_term
   autocmd!
-  autocmd TermOpen * setlocal nospell
-  autocmd TermClose *:$SHELL call s:termclose()
+  autocmd TermOpen * call s:termopen()
+  autocmd TermClose *:$SHELL,*:\$SHELL call s:termclose()
 augroup END
