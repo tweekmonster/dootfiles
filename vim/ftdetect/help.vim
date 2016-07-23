@@ -1,1 +1,1 @@
-autocmd! BufRead,BufNewFile doc/*.txt set filetype=help
+autocmd! BufRead,BufNewFile doc/*.txt,$VIMRUNTIME/doc/*.txt set filetype=help
