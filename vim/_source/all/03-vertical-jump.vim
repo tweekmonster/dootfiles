@@ -36,12 +36,11 @@ function! s:vert_jump(dir, by_col, visual) abort
     endwhile
   else
     let l = line
-    let lc = col('.')
     let vc = virtcol('.')
 
     while c && l
       let l = call(func, [line + a:dir])
-      while l && (s:getline(l, lc) =~# '^\s*$' || strdisplaywidth(getline(l)) < vc)
+      while l && (s:getline(l, vc) =~# '^\s*$' || strdisplaywidth(getline(l)) < vc)
         let l = call(func, [l + a:dir])
       endwhile
       let line = l
