@@ -3,6 +3,7 @@ function! s:setup() abort
   nnoremap <expr><buffer> { max([1, search('\%(\_^#\?\s*\_$\)\\|\%^', 'bW')]).'G'
 
   if expand('%') =~# 'COMMIT_EDITMSG'
+    setlocal spell
     " delete the commit message storing it in "g, and go back to Gstatus
     nnoremap <silent><buffer> q gg"gd/#<cr>:let @/=''<cr>:<c-u>wq<cr>:Gstatus<cr>:call histdel('search', -1)<cr>
     " Restore register "g
