@@ -37,6 +37,7 @@ sources=(
 'keyboard'
 'edit-command'
 'fancydot'
+'tmux-complete'
 'django-completions'
 'less'
 'dootfiles'
