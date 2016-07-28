@@ -36,6 +36,7 @@ sources=(
 'aliases'
 'keyboard'
 'edit-command'
+'fancydot'
 'django-completions'
 'less'
 'dootfiles'
