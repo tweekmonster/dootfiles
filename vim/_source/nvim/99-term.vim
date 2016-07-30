@@ -4,7 +4,10 @@
 function! s:termclose() abort
   let first = max([1, line('w0') - winheight(0)])
   call setreg('t', getline(first, line('$')), 'V')
-  execute 'autocmd BufWinLeave <buffer> split' expand('#')
+  let buf = expand('#')
+  if !empty(buf) && buflisted(buf) && bufnr(buf) != bufnr('%')
+    execute 'autocmd BufWinLeave <buffer> split' buf
+  endif
 endfunction
 
 function! s:tmuxnav(dir) abort
