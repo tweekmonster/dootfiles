@@ -1,10 +1,13 @@
 function! DootfilesGetTitleString() abort
-  try
-    return fnamemodify(fugitive#repo().tree(), ':t')
-  catch
-    return fnamemodify(getcwd(), ':t')
-  endtry
+  if filereadable(expand('%'))
+    try
+      return fnamemodify(fugitive#repo().tree(), ':p:s?/$??:t')
+    catch
+    endtry
+  endif
+
+  return fnamemodify(getcwd(), ':t')
 endfunction
 
 set title
-set titlestring=[%{has('nvim')?'nvim':'vim'}]\ %{DootfilesGetTitleString()}
+set titlestring=%{DootfilesGetTitleString()}
