@@ -20,9 +20,14 @@ function! s:fuck_your_opinions_too_golint(entry) abort
   " variables that are the epitome of 'self explanatory' with a verbose name
   " and message.
   if a:entry.text =~? '\<exported\>.*\<should\>.*\<comment\>'
+        \ || a:entry.text =~# 'Id.*\<should\>.*ID'
     let a:entry.valid = 0
   endif
 endfunction
+
+let g:neomake_go_golint_maker = {
+      \ 'postprocess': function('s:fuck_your_opinions_too_golint'),
+      \ }
 
 let g:neomake_python_flake8_maker = {
       \   'args': ['--ignore=E501,E226,C901,E402,F403,F405'],
