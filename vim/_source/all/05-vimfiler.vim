@@ -14,7 +14,6 @@ augroup vimrc_vimfiler
   autocmd!
   autocmd FileType vimfiler nmap <buffer> q Q
   autocmd FileType vimfiler set nonumber norelativenumber
-  autocmd FileType vimfiler normal gs
   autocmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
 augroup END
 

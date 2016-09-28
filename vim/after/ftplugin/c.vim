@@ -2,6 +2,10 @@ setlocal foldmethod=manual
 nnoremap <buffer> zc zfi{
 nnoremap <buffer> zo zd
 
+setlocal expandtab shiftwidth=2 softtabstop=2 textwidth=80
+setlocal modelines=0 cinoptions=0(
+setlocal comments=:///,://
+
 let s:source_ext = ['.c', '.cpp', '.cc', '.cxx', '.m', '.mm']
 let s:header_ext = ['.h', '.hh', '.hpp']
 

@@ -6,9 +6,25 @@ if exists('syntax_on')
 endif
 
 let g:colors_name = 'custom_tomorrow'
+let g:terminal_color_0  = '#000000'
+let g:terminal_color_1  = '#ff5555'
+let g:terminal_color_2  = '#50fa7b'
+let g:terminal_color_3  = '#f1fa8c'
+let g:terminal_color_4  = '#bd93f9'
+let g:terminal_color_5  = '#ff79c6'
+let g:terminal_color_6  = '#8be9fd'
+let g:terminal_color_7  = '#f8f8f2'
+let g:terminal_color_8  = '#555555'
+let g:terminal_color_9  = '#ff5555'
+let g:terminal_color_10  = '#50fa7b'
+let g:terminal_color_11  = '#f1fa8c'
+let g:terminal_color_12  = '#bd93f9'
+let g:terminal_color_13  = '#ff79c6'
+let g:terminal_color_14  = '#8be9fd'
+let g:terminal_color_15  = '#f8f8f2'
 
 " Vim editor colors
-CPHL PMenu gray4 gray2
+CPHL PMenu gray4 gray2,multiply(white,20)
 CPHL PMenuSel gray0 yellow,bright
 CPHL PMenuSbar - gray0
 CPHL PMenuThumb - gray4
@@ -121,15 +137,10 @@ CPHL link scssProperty cssProp
 CPHL link cssPseudoClass PreProc
 
 " Diff highlighting
-CPHL DiffAdd green gray1 -
-CPHL DiffChange gray3 gray1 -
-CPHL DiffDelete red gray1 -
-CPHL DiffText blue gray1 -
-CPHL DiffAdded green gray0 -
-CPHL DiffFile red gray0 -
-CPHL DiffNewFile green gray0 -
-CPHL DiffLine blue gray0 -
-CPHL DiffRemoved red gray0 -
+CPHL DiffAdd - blue,multiply(black,75)
+CPHL DiffChange - yellow,s-15,multiply(black,80)
+CPHL DiffText cyan,bright yellow,multiply(black,60) underline
+CPHL DiffDelete gray1 gray0
 
 " Git highlighting
 CPHL gitCommitOverflow red - -
@@ -197,10 +208,10 @@ CPHL SignifySignChange blue gray1 -
 CPHL SignifySignDelete red gray1 -
 
 " Spelling highlighting
-CPHL SpellBad red gray0 underline
-CPHL SpellLocal red,light gray0 underline
-CPHL SpellCap orange gray0 underline
-CPHL SpellRare orange,light gray0 underline
+CPHL SpellBad - red,multiply(black,70) underline
+CPHL SpellLocal - green,multiply(black,70) underline
+CPHL SpellCap - orange,multiply(black,70) underline
+CPHL SpellRare - cyan,multiply(black,70) underline
 
 " Help
 CPHL helpExample blue,light - -

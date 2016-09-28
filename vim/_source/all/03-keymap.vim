@@ -37,27 +37,7 @@ imap <Nul> <Space>
 " Highlight last inserted text
 nnoremap gV `[v`]
 
-" Delete a buffer
-function! s:delete_buffer() abort
-  if &l:modified
-    echohl ErrorMsg
-    echomsg 'File is modified'
-    echohl None
-    return
-  endif
-
-  let bufcount = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-  if bufcount == 1
-    return
-  endif
-
-  bprevious
-  split
-  bnext
-  bdelete
-endfunction
-
-nnoremap <silent> <leader>q :<c-u>call <sid>delete_buffer()<cr>
+nnoremap <silent> <leader>q :<c-u>Sayonara!<cr>
 
 " Profiling
 nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
@@ -112,3 +92,6 @@ nnoremap <silent> <leader>ml :call <sid>append_mode_line()<cr>
 
 " dotfiles vim config editing
 nnoremap <localleader>v :<c-u>execute 'Files '.expand('$DOTFILES/vim')<cr>
+
+" Undotree
+nnoremap <silent> <leader>u :<c-u>UndotreeToggle<cr>:UndotreeFocus<cr>

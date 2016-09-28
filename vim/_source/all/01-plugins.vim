@@ -38,6 +38,7 @@ if has('nvim')
   Plug 'carlitux/deoplete-ternjs'
   Plug 'zchee/deoplete-jedi'
   Plug 'zchee/deoplete-clang'
+  Plug 'zchee/deoplete-go'
 endif
 
 " junegunn
@@ -67,11 +68,11 @@ Plug 'tweekmonster/headlines.vim'
 Plug 'tweekmonster/impsort.vim'
 Plug 'tweekmonster/wstrip.vim'
 Plug 'tweekmonster/dyslexic.vim'
+Plug 'tweekmonster/gitbusy.vim'
+Plug 'tweekmonster/colorpal.vim'
 
 " Theming
 Plug 'bling/vim-airline'
-Plug 'ryanoasis/vim-devicons'
-Plug 'ap/vim-buftabline'
 
 " Project Related
 Plug 'benekastah/neomake'
@@ -90,7 +91,7 @@ endif
 Plug 'FooSoft/vim-argwrap'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/NrrwRgn'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kana/vim-textobj-line'
@@ -101,8 +102,11 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mhinz/vim-grepper'
 Plug 'AndrewRadev/sideways.vim'
+Plug 'wellle/tmux-complete.vim'
+Plug 'mbbill/undotree'
 Plug 'majutsushi/tagbar'
-Plug 'nhooyr/neoman.vim'
+Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-sayonara'
 
 " Web Development
 Plug 'fatih/vim-nginx'

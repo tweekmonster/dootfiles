@@ -1,3 +1,4 @@
+let g:terminal_scrollback_buffer_size = 10000
 " Prevent the terminal from taking the window with it when it closes.
 "
 " The last two screens worth of text is stored in register `t`
