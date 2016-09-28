@@ -1,5 +1,5 @@
 set -g default-terminal "xterm-256color"
-set -ag terminal-overrides ',*:Tc'
+set -ag terminal-overrides ',*:Tc,*:sitm=\E[3m,*:ritm=\E[23m'
 set-option -g mouse on
 bind-key -T root PPage if-shell -F "#{alternate_on}" "send-keys PPage" "copy-mode -e; send-keys PPage"
 bind-key -t vi-copy PPage page-up

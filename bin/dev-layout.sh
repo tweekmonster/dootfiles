@@ -1,7 +1,7 @@
 #!/bin/bash
 panes=$(tmux list-panes | wc -l)
 venv=${VIRTUAL_ENV##*/}
-size=${2:-100}
+size=${2:-80}
 
 if [[ $panes -ge 4 ]]; then
   tmux resize-pane -x $size -t 2
