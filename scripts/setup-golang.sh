@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
-VERSION="1.6.2"
+VERSION="1.7.1"
 DIST="linux"
 BASE="$HOME/.local"
 GOROOT="$BASE/go/${VERSION}"
+GOPATH="$XDG_DATA_HOME/go"
 TMPDIR="$BASE/gosetup"
+
+# This is where my sources will live.
+GODEV="$GOPATH/src/github.com/tweekmonster"
+
+# This will simply be a symlink to $GODEV.
+GODEVLINK="$HOME/dev/go"
 
 if [[ ! -d "$GOROOT" ]]; then
   mkdir -p "$(dirname $GOROOT)"
@@ -33,7 +40,13 @@ if [[ ! -d "$GOROOT" ]]; then
 fi
 
 cat <<EOF >> zsh/_setup_zshenv.zsh
-export GOPATH="$HOME/dev/go"
+export GOPATH="$GOPATH"
 export GOROOT="$GOROOT"
-export PATH="\$GOROOT/bin:\$GOPATH/bin:\$PATH"
 EOF
+
+cat <<EOF >> zsh/_setup_zprofile.zsh
+export PATH="$GOROOT/bin:$GOPATH/bin:\$PATH"
+EOF
+
+mkdir -p "$GODEV"
+ln -s "$GODEV" "$GODEVLINK"
