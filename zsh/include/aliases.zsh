@@ -10,6 +10,8 @@ alias mv='nocorrect mv'
 alias mysql='nocorrect mysql'
 alias sudo='nocorrect sudo'
 
+(( $+commands[hub] )) && alias git='hub'
+
 if [[ -n $TMUX && $TERM =~ 'xterm' ]]; then
   alias htop='TERM=screen-256color htop'
 fi
@@ -27,3 +29,8 @@ elif [[ "$(uname -s)" == "OpenBSD" ]]; then
 else
     ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty -F' || alias ls='ls -GF'
 fi
+
+alias lsa='ls -lah'
+alias l='ls -lah'
+alias ll='ls -lh'
+alias la='ls -lAh'

@@ -143,6 +143,7 @@ def install_zsh():
     zdotdir = os.path.join(CONFIG, 'zsh')
     mkdir(zdotdir)
     link('zsh/zshrc.zsh', os.path.join(zdotdir, '.zshrc'))
+    link('zsh/zprofile.zsh', os.path.join(zdotdir, '.zprofile'))
     link('zsh/zshenv.zsh', '.zshenv')
     run('zsh -c "source ~/.zshenv && source %s/.zshrc"' % zdotdir, {
         'DOTFILES_SETUP': '1',
@@ -164,6 +165,7 @@ def install():
     gen = (
         'zsh/_setup_zshrc.zsh',
         'zsh/_setup_zshenv.zsh',
+        'zsh/_setup_zprofile.zsh',
     )
 
     for item in gen:

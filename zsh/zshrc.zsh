@@ -9,7 +9,6 @@ zplug 'zplug/zplug'
 zplug 'tj/git-extras'
 zplug 'lib/history', from:oh-my-zsh
 zplug 'lib/completion', from:oh-my-zsh
-zplug 'lib/directories', from:oh-my-zsh
 zplug 'lib/git', from:oh-my-zsh
 zplug 'lib/theme-and-appearance', from:oh-my-zsh
 zplug 'zsh-users/zsh-syntax-highlighting', nice:10
