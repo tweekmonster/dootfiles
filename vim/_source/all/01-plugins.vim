@@ -70,6 +70,7 @@ Plug 'tweekmonster/wstrip.vim'
 Plug 'tweekmonster/dyslexic.vim'
 Plug 'tweekmonster/gitbusy.vim'
 Plug 'tweekmonster/colorpal.vim'
+Plug 'tweekmonster/helpful.vim'
 
 " Theming
 Plug 'bling/vim-airline'
@@ -107,6 +108,7 @@ Plug 'mbbill/undotree'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-sayonara'
+Plug 'rhysd/github-complete.vim'
 
 " Web Development
 Plug 'fatih/vim-nginx'
