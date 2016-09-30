@@ -16,6 +16,10 @@ if [[ -n $TMUX && $TERM =~ 'xterm' ]]; then
   alias htop='TERM=screen-256color htop'
 fi
 
+if [[ $TERM =~ 'tmux' ]]; then
+  alias ssh='nocorrect TERM=screen-256color ssh'
+fi
+
 # Snatched from oh-my-zsh, except with the -F flag
 # Find the option for using colors in ls, depending on the version: Linux or BSD
 if [[ "$(uname -s)" == "NetBSD" ]]; then
