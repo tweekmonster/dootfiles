@@ -112,6 +112,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-sayonara'
 Plug 'rhysd/github-complete.vim'
+Plug 'vimwiki/vimwiki'
 
 " Web Development
 Plug 'fatih/vim-nginx'
