@@ -3,7 +3,49 @@ let s:dev_config = g:_vimrc_base.'/.plugin_dev'
 let s:plugdirs = ['after', 'autoload', 'colors', 'ftplugin', 'indent', 'keymap', 'plugin', 'syntax']
 
 
-function! s:dev_plugins() abort
+function! s:is_plugin(dir) abort
+  for p in s:plugdirs
+    if filewritable(a:dir.'/'.p) == 2
+      return 1
+    endif
+  endfor
+  return 0
+endfunction
+
+
+function! s:sort_date(a, b) abort
+  if a:a[-1] < a:b[-1]
+    return -1
+  elseif a:a[-1] > a:b[-1]
+    return 1
+  endif
+  return 0
+endfunction
+
+
+function! s:dirdate(dir) abort
+  let newest = 0
+  for p in s:plugdirs
+    let d_newest = max(map(split(glob(a:dir.'/'.p.'/**'), "\n"), 'getftime(v:val)'))
+    if d_newest > newest
+      let newest = d_newest
+    endif
+  endfor
+  return newest
+endfunction
+
+
+function! s:dev_plugins(...) abort
+  if a:0
+    let plugs = []
+    for dir in split(glob(g:_vimrc_dev_dir.'/*'), "\n")
+      if s:is_plugin(dir)
+        call add(plugs, [dir, s:dirdate(dir)])
+      endif
+    endfor
+    return reverse(map(sort(plugs, 's:sort_date'), 'fnamemodify(v:val[0], ":t")'))
+  endif
+
   if filereadable(s:dev_config)
     return readfile(s:dev_config)
   endif
