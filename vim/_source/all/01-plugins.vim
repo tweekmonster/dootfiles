@@ -71,6 +71,9 @@ Plug 'tweekmonster/dyslexic.vim'
 Plug 'tweekmonster/gitbusy.vim'
 Plug 'tweekmonster/colorpal.vim'
 Plug 'tweekmonster/helpful.vim'
+Plug 'tweekmonster/hl-goimport.vim'
+Plug 'tweekmonster/local-indent.vim'
+Plug 'tweekmonster/cwdjump.vim'
 
 " Theming
 Plug 'bling/vim-airline'
