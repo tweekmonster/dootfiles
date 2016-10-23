@@ -24,6 +24,7 @@ set splitbelow
 set splitright
 set wildmenu
 set exrc
+set shortmess+=c
 
 if !has('nvim')
   set t_Co=256
