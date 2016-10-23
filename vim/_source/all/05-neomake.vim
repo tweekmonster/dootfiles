@@ -20,7 +20,7 @@ function! s:fuck_your_opinions_too_golint(entry) abort
   " variables that are the epitome of 'self explanatory' with a verbose name
   " and message.
   if a:entry.text =~? '\<exported\>.*\<should\>.*\<comment\>'
-        \ || a:entry.text =~# 'Id.*\<should\>.*ID'
+        \ || a:entry.text =~# '[Ii]d.*\<should\>.*ID'
     let a:entry.valid = 0
   endif
 endfunction
