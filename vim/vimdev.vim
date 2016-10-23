@@ -1,11 +1,13 @@
 " Utilities for swapping out plugin directories in development mode
 let s:dev_config = g:_vimrc_base.'/.plugin_dev'
+let s:plugdirs = ['after', 'autoload', 'colors', 'ftplugin', 'indent', 'keymap', 'plugin', 'syntax']
 
 
 function! s:dev_plugins() abort
   if filereadable(s:dev_config)
     return readfile(s:dev_config)
   endif
+
   return []
 endfunction
 
@@ -38,8 +40,11 @@ endfunction
 function! s:dev_add_completion(A, L, P) abort
   let plugs = []
   let plugins = s:dev_plugins()
-  for p in g:plugs_order
+  let all_dev_plugins = s:dev_plugins(1)
+
+  for p in all_dev_plugins
     if index(plugins, p) == -1
+      echomsg p
       call add(plugs, p)
     endif
   endfor
@@ -74,25 +79,41 @@ endfunction
 
 
 function! s:dev_remove(plugin) abort
+  let plugin = a:plugin
   let plugins = s:dev_plugins()
-  let i = index(plugins, a:plugin)
-  if i == -1
-    echohl ErrorMsg
-    echomsg a:plugin.' is not in dev mode'
-    echohl None
-    return
+
+  if empty(a:plugin)
+    let plugins_sel = []
+    for p in plugins
+      call add(plugins_sel, printf('%2d. %s', len(plugins_sel) + 1, p))
+    endfor
+    redraw
+    let i = inputlist(plugins_sel) - 1
+    if i == -1 || i >= len(plugins)
+      return
+    endif
+    let plugin = plugins[i]
+  else
+    let i = index(plugins, a:plugin)
+    if i == -1
+      echohl ErrorMsg
+      echomsg plugin.' is not in dev mode'
+      echohl None
+      return
+    endif
   endif
 
   call remove(plugins, i)
   call writefile(plugins, s:dev_config)
 
+  redraw
   echohl WarningMsg
-  echomsg a:plugin.' removed from dev list.  Restart to take effect.'
+  echomsg plugin.' removed from dev list.  Restart to take effect.'
   echohl None
 endfunction
 
 
 command! -nargs=1 -complete=custom,<sid>dev_add_completion PlugDevAdd
       \ call <sid>dev_add('<args>')
-command! -nargs=1 -complete=custom,<sid>dev_remove_completion PlugDevRemove
+command! -nargs=? -complete=custom,<sid>dev_remove_completion PlugDevRemove
       \ call <sid>dev_remove('<args>')
