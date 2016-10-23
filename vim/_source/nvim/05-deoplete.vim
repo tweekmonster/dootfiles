@@ -13,9 +13,13 @@ let deoplete#tag#cache_limit_size = 5000000
 if has('macunix')
   let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 else
-  let g:deoplete#sources#clang#libclang_path = '/usr/lib/x86_64-linux-gnu/libclang.so.1'
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1'
   let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
 endif
+
+let g:deoplete#sources#go#cgo#libclang_path = g:deoplete#sources#clang#libclang_path
+let g:deoplete#sources#go#auto_goos = 1
+let g:deoplete#sources#jedi#debug_server = 1
 
 
 function! s:setup_deoplete() abort
@@ -34,5 +38,5 @@ endfunction
 
 augroup vimrc_deoplete
   autocmd!
-  autocmd VimEnter * call s:setup_deoplete()
+  autocmd VimEnter * try | call s:setup_deoplete() | catch | endtry
 augroup END
