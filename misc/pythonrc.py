@@ -26,7 +26,10 @@ if len(sys.argv) == 1:
                   (os.path.basename(sys.executable), '-m', 'IPython'), env)
     except ImportError:
         """Fallback to the plain REPL."""
-        import readline
-        import rlcompleter
+        try:
+            import readline
+            import rlcompleter
 
-        readline.parse_and_bind('tab: complete')
+            readline.parse_and_bind('tab: complete')
+        except ImportError:
+            pass
