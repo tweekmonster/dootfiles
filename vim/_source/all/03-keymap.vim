@@ -81,7 +81,7 @@ function! s:append_mode_line()
   let l:modeline = printf(' vim: set ft=%s ts=%d sw=%d tw=%d %set :',
         \ &filetype, &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
   let l:commentstring = &commentstring
-  if tcomment#TypeExists(&filetype) != ''
+  if exists('g:loaded_tcomment') && tcomment#TypeExists(&filetype) != ''
     let l:commentstring = tcomment#GetCommentDef(&filetype).commentstring
   endif
   let l:modeline = printf(l:commentstring, l:modeline)
