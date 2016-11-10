@@ -6,6 +6,7 @@ function! s:diff_close() abort
   endif
 
   if &bufhidden != 'delete'
+    unlet! w:fugitive_diff_restore
     for i in range(1, winnr('$'))
       if !empty(getwinvar(i, 'fugitive_diff_restore', ''))
         execute 'noautocmd' i 'windo edit' bufname('%')
