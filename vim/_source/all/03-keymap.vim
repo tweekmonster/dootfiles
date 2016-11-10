@@ -43,19 +43,6 @@ nnoremap <silent> <leader>q :<c-u>Sayonara!<cr>
 nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
 nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 
-nnoremap * :<c-u>let vsave=winsaveview()<cr>
-      \ h*N
-      \ :<c-u>call winrestview(vsave)<cr>
-      \ :<c-u>unlet! vsave<cr>N
-nnoremap # :<c-u>let vsave=winsaveview()<cr>
-      \ h#N
-      \ :<c-u>call winrestview(vsave)<cr>
-      \ :<c-u>unlet! vsave<cr>N
-vnoremap <silent> * "vy:<c-u>let vsave=winsaveview()<cr>
-      \ /<c-r>=substitute(escape(@v, '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<cr><cr>N
-      \ :<c-u>call winrestview(vsave)<cr>
-      \ :<c-u>unlet! vsave<cr>N
-
 " Visual range macros
 function! s:visual_range_macro()
   echo "@".getcmdline()
