@@ -11,7 +11,7 @@ function! s:gg(...) abort
       call timer_stop(s:gg_timer)
     endif
 
-    let s:gg_timer = timer_start(500, 's:gg')
+    let s:gg_timer = timer_start(500, function('s:gg'))
     return
   endif
 
