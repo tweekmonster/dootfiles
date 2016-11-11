@@ -23,7 +23,6 @@ set showcmd
 set splitbelow
 set splitright
 set wildmenu
-set exrc
 set shortmess+=c
 
 if !has('nvim')
@@ -61,5 +60,3 @@ if !isdirectory(s:undo_dir)
     call mkdir(s:undo_dir, 'p', 0700)
 endif
 exec 'set undodir=' . s:undo_dir
-
-set secure

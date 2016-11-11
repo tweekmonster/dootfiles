@@ -1,3 +1,6 @@
+if exists('main_syntax')
+  finish
+endif
 unlet b:current_syntax
 syntax include @HTML $VIMRUNTIME/syntax/html.vim
 
