@@ -53,11 +53,45 @@ function! s:search_scroll(key, ...) abort
 endfunction
 
 
+function! s:highlight_cursor_word() abort
+  let vimkey = 0
+  let pat = '\k*\%'.col('.').'c\@<=\k\k*'
+  if &filetype == 'vim'
+    let pat = '\%(<sid>\|[bwtglsav]:\)\?'.pat
+    if synIDattr(synID(line('.'), col('.'), 0), 'name') =~# 'vimMapModKey\|vimNotation'
+      let vimkey = 1
+      let pat = '<\?'.pat.'>\?'
+    endif
+  endif
+
+  let word = matchstr(getline('.'), pat)
+  if get(w:, '_cword', '') != word
+    silent! call matchdelete(w:_cword_id)
+    let w:_cword = word
+
+    if !empty(word)
+      let word = escape(word, '^$.\[]*')
+      if word =~? '^\%(<sid>\|s:\)'
+        let word = '\%(<sid>\|s:\)'.matchstr(word, '^\%(<sid>\|s:\)\zs.*').'\>'
+      elseif !vimkey
+        let word = '\<'.word.'\>'
+      endif
+
+      let w:_cword_id = matchadd('CursorWord', '\c'.word, -1)
+    endif
+  endif
+endfunction
+
+
 augroup vimrc_search
   autocmd!
+  autocmd CursorMoved * call s:highlight_cursor_word()
   autocmd InsertEnter * call s:toggle_highlight()
   autocmd InsertLeave * call s:toggle_highlight()
 augroup END
+
+
+highlight default CursorWord gui=underline cterm=underline
 
 
 nnoremap <silent><expr> * <sid>star_search('*')
