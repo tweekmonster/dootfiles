@@ -77,7 +77,7 @@ function! s:highlight_cursor_word() abort
         let word = '\<'.word.'\>'
       endif
 
-      let w:_cword_id = matchadd('CursorWord', '\c'.word, -1)
+      let w:_cword_id = matchadd('CursorWord', word, -1)
     endif
   endif
 endfunction
