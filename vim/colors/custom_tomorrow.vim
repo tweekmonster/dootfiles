@@ -232,4 +232,4 @@ CPHL BufTabLineActive gray0 green,l-=.5,s-=.5
 CPHL BufTabLineHidden gray4 gray2
 CPHL BufTabLineFill - gray1
 
-CPHL CursorWord - - underline
+CPHL CursorWord - blue,multiply(black,85),light underline
