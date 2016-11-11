@@ -233,3 +233,4 @@ CPHL BufTabLineHidden gray4 gray2
 CPHL BufTabLineFill - gray1
 
 CPHL CursorWord - blue,multiply(black,85),light underline
+CPHL Halo - violet,multiply(black,70) -

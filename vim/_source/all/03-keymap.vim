@@ -40,6 +40,21 @@ nnoremap <silent> <leader>q :<c-u>Sayonara!<cr>
 nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
 nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 
+function! s:autospell()
+  let sp = &spell
+  set spell
+  let cword = expand('<cword>')
+  let suggestions = spellsuggest(cword)
+  let selection = inputlist(['Change "'.cword.'" to:'] +
+        \ map(copy(suggestions), 'printf("%2d. \"%s\"", v:key + 1, v:val)'))
+  if selection
+    execute 'normal! ciw'.suggestions[selection - 1]
+  endif
+  let &spell = sp
+endfunction
+
+nnoremap z= :<c-u>call <sid>autospell()<cr>
+
 " Visual range macros
 function! s:visual_range_macro()
   echo "@".getcmdline()
@@ -83,3 +98,5 @@ nnoremap <silent> <leader>u :<c-u>UndotreeToggle<cr>:UndotreeFocus<cr>
 " Inserting dates
 nnoremap <localleader>d a<c-r>=join(systemlist('date -Iseconds'), '')<cr><esc>
 vnoremap <localleader>d c<c-r>=join(systemlist('date -Iseconds'), '')<cr><esc>
+
+nnoremap <silent> <space> :<c-u>call halo#run({'shape': 'line'})<cr>

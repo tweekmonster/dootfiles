@@ -61,7 +61,7 @@ Plug 'tpope/vim-scriptease'
 " My stuff
 Plug 'tweekmonster/fzf-filemru'
 Plug 'tweekmonster/braceless.vim'
-Plug 'tweekmonster/sshclip', {'do': './bin/sshclip-client --impersonate sshclip'}
+" Plug 'tweekmonster/sshclip', {'do': './bin/sshclip-client --impersonate sshclip'}
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'tweekmonster/django-plus.vim'
 Plug 'tweekmonster/headlines.vim'
@@ -113,6 +113,9 @@ Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-sayonara'
 Plug 'rhysd/github-complete.vim'
 Plug 'vimwiki/vimwiki'
+Plug 'MarcWeber/vim-addon-local-vimrc'
+Plug 'mhinz/vim-halo'
+Plug 'kassio/neoterm'
 
 " Web Development
 Plug 'fatih/vim-nginx'
@@ -120,7 +123,6 @@ Plug 'othree/xml.vim'
 Plug 'othree/html5.vim'
 Plug 'othree/yajs.vim'
 Plug 'nono/jquery.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'groenewege/vim-less'
 Plug 'csscomb/vim-csscomb'
@@ -138,6 +140,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'JulesWang/css.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'justinmk/vim-syntax-extra'
+Plug 'syngan/vim-vimlint'
 
 " Scan for development replacements before plug#end()
 call vimdev#scan()
