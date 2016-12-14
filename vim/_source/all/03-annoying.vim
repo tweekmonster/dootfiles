@@ -3,7 +3,7 @@
 highlight default link WrongTab Error
 
 function! s:highlight_wrong_tabs() abort
-  if &l:filetype != 'help'
+  if &l:filetype == 'help'
     return
   endif
 
