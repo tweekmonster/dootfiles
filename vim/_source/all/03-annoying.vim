@@ -29,6 +29,7 @@ augroup vimrc_annoying
 augroup END
 
 
+" sudo write using ✨magic✨
 cnoremap <silent><expr> <cr> !filewritable(bufname('%')) && getcmdtype() == ':' && getcmdline() ==# 'w'
-      \ ? "\<bs>:call execute(\"w !sudo dd of=% 2>/dev/null\")\<cr>:e!\<cr>"
+      \ ? "\<bs>:call execute(\"".(has('mac') ? "w !osascript -e 'do shell script \\\"cat 0<&3 > %\\\" with administrator privileges' 3<&0" : "w !sudo dd of=% 2>/dev/null")."\")\<cr>:e!\<cr>"
       \ : "\<cr>"
