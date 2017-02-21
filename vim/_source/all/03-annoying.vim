@@ -3,7 +3,7 @@
 highlight default link WrongTab Error
 
 function! s:highlight_wrong_tabs() abort
-  if &l:filetype == 'help'
+  if &l:filetype =~# 'help\|man'
     return
   endif
 
@@ -25,4 +25,10 @@ augroup vimrc_annoying
   " This makes it so Python documentation buffers go away
   autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
   " autocmd BufWinEnter,SessionLoadPost * silent! %foldopen!
+  autocmd FileChangedRO * setlocal noreadonly
 augroup END
+
+
+cnoremap <silent><expr> <cr> !filewritable(bufname('%')) && getcmdtype() == ':' && getcmdline() ==# 'w'
+      \ ? "\<bs>:call execute(\"w !sudo dd of=% 2>/dev/null\")\<cr>:e!\<cr>"
+      \ : "\<cr>"
