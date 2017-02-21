@@ -27,17 +27,15 @@ Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim'
-endif
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-vim'
 
 " Shougo - Deoplete
 if has('nvim')
+  Plug 'Shougo/deoplete.nvim'
   Plug 'carlitux/deoplete-ternjs'
   Plug 'zchee/deoplete-jedi'
-  Plug 'zchee/deoplete-clang'
+  Plug 'tweekmonster/deoplete-clang2'
   Plug 'zchee/deoplete-go'
 endif
 
@@ -59,6 +57,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-scriptease'
 
 " My stuff
+Plug 'tweekmonster/nvimdev.nvim'
 Plug 'tweekmonster/fzf-filemru'
 Plug 'tweekmonster/braceless.vim'
 " Plug 'tweekmonster/sshclip', {'do': './bin/sshclip-client --impersonate sshclip'}
@@ -74,15 +73,27 @@ Plug 'tweekmonster/helpful.vim'
 Plug 'tweekmonster/hl-goimport.vim'
 Plug 'tweekmonster/local-indent.vim'
 Plug 'tweekmonster/cwdjump.vim'
+Plug 'tweekmonster/gofmt.vim'
+
+" mhinz
+Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-grepper'
+Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-sayonara'
+Plug 'mhinz/vim-workhorse'
+Plug 'mhinz/vim-halo'
+Plug 'mhinz/vim-lookup'
+
+" tjdevries
+Plug 'tjdevries/nvim-langserver-shim'
+Plug 'tjdevries/descriptive_maps.vim'
 
 " Theming
 Plug 'bling/vim-airline'
 
 " Project Related
-Plug 'benekastah/neomake'
+Plug 'neomake/neomake'
 Plug 'gregsexton/gitv'
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
 
 " Snippets
 Plug 'mattn/emmet-vim'
@@ -104,22 +115,16 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'tyru/caw.vim'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'mhinz/vim-grepper'
 Plug 'AndrewRadev/sideways.vim'
-Plug 'wellle/tmux-complete.vim'
 Plug 'mbbill/undotree'
 Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-startify'
-Plug 'mhinz/vim-sayonara'
 Plug 'rhysd/github-complete.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'MarcWeber/vim-addon-local-vimrc'
-Plug 'mhinz/vim-halo'
 Plug 'kassio/neoterm'
 
 " Web Development
 Plug 'fatih/vim-nginx'
-Plug 'othree/xml.vim'
 Plug 'othree/html5.vim'
 Plug 'othree/yajs.vim'
 Plug 'nono/jquery.vim'
@@ -141,6 +146,9 @@ Plug 'JulesWang/css.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'syngan/vim-vimlint'
+Plug 'rhysd/vim-clang-format'
+Plug 'dgryski/vim-godef'
+Plug 'smerrill/vcl-vim-plugin'
 
 " Scan for development replacements before plug#end()
 call vimdev#scan()

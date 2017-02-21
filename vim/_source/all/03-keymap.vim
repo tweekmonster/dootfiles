@@ -4,14 +4,6 @@ function! s:cmdalias(lhs, rhs) abort
   execute 'cmap <expr> '.a:lhs.' getcmdtype()=='':'' && getcmdpos()==1 ? "'.a:rhs.'" : "'.a:lhs.'"'
 endfunction
 
-" Fat fingers
-call s:cmdalias('w;', ":echoe 'NO!'\<cr>")
-call s:cmdalias('w''', ":echoe 'NO!'\<cr>")
-call s:cmdalias('w/', ":echoe 'NO!'\<cr>")
-
-" Sudo write
-call s:cmdalias('w!!', 'w !sudo tee > /dev/null %')
-
 " Buffer-local file editing
 
 " Show syntax groups
@@ -100,3 +92,36 @@ nnoremap <localleader>d a<c-r>=join(systemlist('date -Iseconds'), '')<cr><esc>
 vnoremap <localleader>d c<c-r>=join(systemlist('date -Iseconds'), '')<cr><esc>
 
 nnoremap <silent> <space> :<c-u>call halo#run({'shape': 'line'})<cr>
+
+function! s:copy_url(mode) abort
+  if a:mode == 'v'
+    let save_reg = getreg('u')
+    let save_regtype = getregtype('u')
+    normal! gv"uygv
+    let word = getreg('u')
+    call setreg('u', save_reg, save_regtype)
+  else
+    let word = expand('<cWORD>')
+    let word = matchstr(word, 'https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?'
+          \ .'\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}'
+          \ .'\(:[0-9]\{1,5}\)\?\([-./%?+=]\|\w\)\+')
+    if empty(word)
+      let word = expand('<cword>')
+    endif
+  endif
+
+  if empty(word)
+    return
+  endif
+
+  if word !~# '^https\?:'
+    let word = substitute(word, '\w\@!.', '\=printf("%%%02x", char2nr(submatch(0)))', 'g')
+    let word = 'https://www.google.com/search?q='.word
+  endif
+
+  call setreg('+', 'sshclip-url:'.word, 'c')
+  echomsg word
+endfunction
+
+nnoremap <silent> gx :call <sid>copy_url('n')<cr>
+vnoremap <silent> gx :<c-u>call <sid>copy_url('v')<cr>

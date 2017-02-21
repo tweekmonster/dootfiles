@@ -1,4 +1,4 @@
 setlocal foldmethod=manual
 setlocal cinoptions=0(,0[
-nnoremap zc $zfa{
-nnoremap zo zd
+nnoremap <buffer> zc $zfa{
+nnoremap <buffer> zo zd

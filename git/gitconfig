@@ -4,6 +4,7 @@ excludesfile = ~/.gitignore_global
 
 [include]
 path = ~/.gitconfig_local
+path = /home/tallen/.gofork_config
 
 [push]
 default = simple

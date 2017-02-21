@@ -1,42 +1,40 @@
-let g:neomake_error_sign = {
-      \   'text': '✕',
-      \   'texthl': 'NeomakeErr',
-      \ }
+let g:neomake_highlight_columns = 1
+let g:neomake_highlight_lines = 0
 
-let g:neomake_warning_sign = {
-      \   'text': '⚠️',
-      \   'texthl': 'NeomakeWarn',
-      \ }
+silent! call neomake#quickfix#enable()
 
-
-function! s:fuck_your_opinion_about_star_imports_flake8(entry) abort
-  if a:entry.text =~# '401' && a:entry.text =~# '\.\*'
-    let a:entry.valid = 0
+let g:neomake_go_go_maker = neomake#makers#ft#go#go()
+function! g:neomake_go_go_maker.postprocess(entry) abort
+  if a:entry.bufnr != bufnr('%')
+    " Don't display messages that aren't about the current buffer.
+    let a:entry.valid = -1
   endif
 endfunction
 
-function! s:fuck_your_opinions_too_golint(entry) abort
-  " Oh yes, please tell me about how I should add a comment to exported error
-  " variables that are the epitome of 'self explanatory' with a verbose name
-  " and message.
-  if a:entry.text =~? '\<exported\>.*\<should\>.*\<comment\>'
-        \ || a:entry.text =~# '[Ii]d.*\<should\>.*ID'
-    let a:entry.valid = 0
+let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
+function! g:neomake_python_flake8_maker.postprocess(entry) abort
+  if a:entry.nr == 501 || a:entry.nr == 401 || a:entry.nr == 405
+    let a:entry.valid = -1
+    return
   endif
+
+  call neomake#makers#ft#python#Flake8EntryProcess(a:entry)
 endfunction
 
-let g:neomake_go_golint_maker = {
-      \ 'postprocess': function('s:fuck_your_opinions_too_golint'),
+let g:neomake_python_enabled_makers = ['flake8']
+
+let g:neomake_vcl_varnish_maker = {
+      \ 'exe': 'varnishd',
+      \ 'args': ['-C', '-n', '/tmp', '-f', '%:p'],
+      \ 'append_file': 0,
+      \ 'errorformat': '%EMessage from VCC-compiler:,%Z(''%f'' Line %l Pos %c),%+C%.%#,%-G%.%#',
       \ }
 
-let g:neomake_python_flake8_maker = {
-      \   'args': ['--ignore=E501,E226,C901,E402,F403,F405'],
-      \   'postprocess': function('s:fuck_your_opinion_about_star_imports_flake8'),
-      \ }
+let g:neomake_vcl_enabled_makers = ['varnish']
+let g:neomake_objc_enabled_makers = ['clang']
 
-let g:neomake_go_golint_maker = {
-      \ 'postprocess': function('s:fuck_your_opinions_too_golint'),
-      \ }
+let g:nvimdev_auto_cscope = 1
+silent! set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 
 augroup vimrc_neomake
   autocmd!

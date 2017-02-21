@@ -33,7 +33,11 @@ endfunction
 
 
 function! s:search_scroll(key, ...) abort
-  execute "normal! " . a:key
+  try
+    execute "normal! " . a:key
+  catch
+    return
+  endtry
 
   let l = line('.')
   let t = line('w0')
@@ -53,7 +57,12 @@ function! s:search_scroll(key, ...) abort
 endfunction
 
 
-function! s:highlight_cursor_word() abort
+function! s:highlight_cursor_word(...) abort
+  if &filetype =~# 'help\|qf'
+    return
+  endif
+
+  unlet! w:_cword_timer
   let vimkey = 0
   let pat = '\k*\%'.col('.').'c\@<=\k\k*'
   if &filetype == 'vim'
@@ -83,9 +92,18 @@ function! s:highlight_cursor_word() abort
 endfunction
 
 
+function! s:highlight_cursor_word_timer() abort
+  if exists('w:_cword_timer')
+    call timer_stop(w:_cword_timer)
+  endif
+
+  let w:_cword_timer = timer_start(100, function('s:highlight_cursor_word'))
+endfunction
+
+
 augroup vimrc_search
   autocmd!
-  autocmd CursorMoved * call s:highlight_cursor_word()
+  autocmd CursorMoved * call s:highlight_cursor_word_timer()
   autocmd InsertEnter * call s:toggle_highlight()
   autocmd InsertLeave * call s:toggle_highlight()
 augroup END

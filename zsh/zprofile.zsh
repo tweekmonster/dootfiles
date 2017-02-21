@@ -40,6 +40,21 @@ if [[ -z $ZSHENV_INIT ]]; then
   export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.local/npm/bin:$PATH"
 fi
 
+
+# FZF
+export FZF_TMUX_HEIGHT=20
+if hash pt 2>/dev/null; then
+  export FZF_DEFAULT_COMMAND='pt -l -g ""'
+fi
+
+
+if hash nvim 2>/dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
+
+
 cdpath=(
   ${GOPATH}/src/github.com(N-/)
   ${HOME}/dev(N-/)

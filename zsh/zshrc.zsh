@@ -74,3 +74,10 @@ fi
 # duplicates.  It's okay.
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 unset script_base
+
+nvim() {
+  [[ -f "core" ]] && mv "core" "core-$(date +%s -r core)"
+  $commands[nvim] "$@"
+}
+
+ulimit -c unlimited

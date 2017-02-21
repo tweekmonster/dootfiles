@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-VERSION="1.7.1"
+VERSION="1.8"
 DIST="linux"
 BASE="$HOME/.local"
 GOROOT="$BASE/go/${VERSION}"

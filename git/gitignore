@@ -6,6 +6,8 @@ musings/
 .vimroot
 .nvimrc
 .vimrc
+/.tern-project
+/.tern-port
 
 
 ### OSX ###

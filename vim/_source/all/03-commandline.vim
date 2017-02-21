@@ -1,4 +1,5 @@
 cnoremap <c-p> <up>
+cnoremap <c-n> <down>
 
 function! s:setup() abort
   " <c-p> and <c-n> already move up and down.  This overrides the other

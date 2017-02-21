@@ -1,6 +1,5 @@
 set colorcolumn=80
-set completeopt+=menuone
-set completeopt-=preview
+set completeopt=menuone
 try
   set completeopt+=noinsert
 catch
@@ -24,6 +23,9 @@ set splitbelow
 set splitright
 set wildmenu
 set shortmess+=c
+if exists('+signcolumn')
+  set signcolumn=yes
+endif
 
 if !has('nvim')
   set t_Co=256
