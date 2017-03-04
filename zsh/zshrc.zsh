@@ -1,20 +1,13 @@
 source "$ZPLUG_HOME/init.zsh"
-setopt hist_ignore_all_dups
-unsetopt correct_all
-setopt correct
-
 script_base=$(dirname "${${(%):-%N}:A}")
 
 zplug 'zplug/zplug'
 zplug 'tj/git-extras'
-zplug 'lib/history', from:oh-my-zsh
-zplug 'lib/completion', from:oh-my-zsh
-zplug 'lib/git', from:oh-my-zsh
-zplug 'lib/theme-and-appearance', from:oh-my-zsh
-zplug 'zsh-users/zsh-syntax-highlighting', nice:10
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-history-substring-search'
-zplug 'tweekmonster/nanofish', nice:10
+zplug 'jamesob/desk', as:plugin, use:'shell_plugins/zsh'
+zplug 'jamesob/desk', as:command, use:'desk'
 
 if [[ -z $DOTFILES_SETUP ]]; then
   if ! zplug check --verbose; then
@@ -32,6 +25,7 @@ else
 fi
 
 sources=(
+'options'
 'aliases'
 'keyboard'
 'edit-command'
@@ -40,6 +34,7 @@ sources=(
 'django-completions'
 'less'
 'dootfiles'
+'pure'
 )
 
 for s in "${sources[@]}"; do
@@ -81,3 +76,6 @@ nvim() {
 }
 
 ulimit -c unlimited
+
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true

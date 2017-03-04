@@ -139,7 +139,7 @@ def install_vim():
 def install_zsh():
     zplug = os.path.join(CONFIG, 'zplug')
     if not os.path.isdir(zplug):
-        run('curl -L get.zplug.sh | env ZPLUG_HOME="%s" zsh' % zplug)
+        run('curl -L zplug.sh/installer | env ZPLUG_HOME="%s" zsh' % zplug)
     zdotdir = os.path.join(CONFIG, 'zsh')
     mkdir(zdotdir)
     link('zsh/zshrc.zsh', os.path.join(zdotdir, '.zshrc'))

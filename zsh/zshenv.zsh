@@ -1,4 +1,5 @@
 script_base=$(dirname "${${(%):-%N}:A}")
+export TZ=:/etc/localtime
 export DOTFILES=$(dirname "$script_base")
 export HOMEBREW_NO_ANALYTICS=1
 
@@ -11,6 +12,7 @@ export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp/$USER}"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export HISTFILE="$ZDOTDIR/.zsh_history"
 export ZPLUG_HOME="$XDG_CONFIG_HOME/zplug"
+export DESK_DIR="$XDG_CONFIG_HOME/desk"
 
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc.py"
 
