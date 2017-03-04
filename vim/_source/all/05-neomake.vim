@@ -33,8 +33,8 @@ let g:neomake_vcl_varnish_maker = {
 let g:neomake_vcl_enabled_makers = ['varnish']
 let g:neomake_objc_enabled_makers = ['clang']
 
-let g:nvimdev_auto_cscope = 1
-silent! set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+" let g:nvimdev_auto_cscope = 1
+" silent! set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 
 augroup vimrc_neomake
   autocmd!

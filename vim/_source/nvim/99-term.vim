@@ -30,7 +30,7 @@ function! s:tmuxnav(dir) abort
 endfunction
 
 function! s:termopen() abort
-  setlocal nospell
+  setlocal nospell signcolumn=no
   tnoremap <silent><buffer> <m-h> <c-\><c-n>:<c-u>call <sid>tmuxnav('Left')<cr>
   tnoremap <silent><buffer> <m-j> <c-\><c-n>:<c-u>call <sid>tmuxnav('Down')<cr>
   tnoremap <silent><buffer> <m-k> <c-\><c-n>:<c-u>call <sid>tmuxnav('Up')<cr>

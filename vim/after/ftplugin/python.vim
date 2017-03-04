@@ -39,7 +39,7 @@ if &l:diff
   finish
 endif
 
-BracelessEnable +indent +highlight-cc2
+BracelessEnable +indent
 
 if exists(':ImpSort')
   let b:_import_seen = []

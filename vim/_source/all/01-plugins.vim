@@ -37,6 +37,7 @@ if has('nvim')
   Plug 'zchee/deoplete-jedi'
   Plug 'tweekmonster/deoplete-clang2'
   Plug 'zchee/deoplete-go'
+  Plug 'zchee/nvim-go', {'do': 'make'}
 endif
 
 " junegunn
@@ -76,13 +77,14 @@ Plug 'tweekmonster/cwdjump.vim'
 Plug 'tweekmonster/gofmt.vim'
 
 " mhinz
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-sayonara'
 Plug 'mhinz/vim-workhorse'
 Plug 'mhinz/vim-halo'
 Plug 'mhinz/vim-lookup'
+Plug 'airblade/vim-gitgutter'
 
 " tjdevries
 Plug 'tjdevries/nvim-langserver-shim'
@@ -104,7 +106,7 @@ endif
 
 " Utilities
 Plug 'FooSoft/vim-argwrap'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/NrrwRgn'
@@ -137,7 +139,6 @@ Plug 'posva/vim-vue'
 Plug 'davidhalter/jedi-vim'
 Plug 'hdima/python-syntax'
 Plug 'tmux-plugins/vim-tmux'
-Plug 'fatih/vim-go'
 Plug 'elzr/vim-json'
 Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
@@ -147,7 +148,6 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'syngan/vim-vimlint'
 Plug 'rhysd/vim-clang-format'
-Plug 'dgryski/vim-godef'
 Plug 'smerrill/vcl-vim-plugin'
 
 " Scan for development replacements before plug#end()
