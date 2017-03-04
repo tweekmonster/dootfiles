@@ -15,19 +15,32 @@ errline() {
   awk '{ print "<em>"$0"</em>" }'
 }
 
+upload() {
+  cat | ssh share.esdf.io "mkdir -p www/share/$id && cat - > www/share/$file"
+}
+
+id=$(base64 /dev/urandom | tr -d '/+' | head -c 10)
+
 if [[ $# -eq 1 && -f $1 ]]; then
   # Generated from: https://highlightjs.org/download/
   HIGHLIGHT='<link rel="stylesheet" href="/.highlight/styles/github-gist.css">
 <script src="/.highlight/highlight.pack.js"></script>'
   cmd=$(basename "$1")
   CLASS=${cmd##*.}
+  if [[ "$CLASS" == "html" ]]; then
+    name=$(echo "$cmd" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+\|-+$//g' | tr A-Z a-z)
+    file="$id/$name.html"
+    cat "$1" | upload
+    echo "https://share.esdf.io/$file"
+    exit 0
+  fi
+
   cat "$1" | escape > "$STDOUT_FILE"
 else
   sh -l -c "$cmd" 1> >(tee >(escape >> "$STDOUT_FILE")) \
     2> >(tee >(escape | errline >> "$STDOUT_FILE") >&2)
 fi
 
-id=$(base64 /dev/urandom | tr -d '/+' | head -c 10)
 name=$(echo "$cmd" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+\|-+$//g' | tr A-Z a-z)
 file="$id/$name.html"
 url="https://share.esdf.io/$file"
@@ -152,7 +165,7 @@ HTML
     echo -n "</script>"
   fi
   rm $STDOUT_FILE
-} | ssh share.esdf.io "mkdir -p www/share/$id && cat - > www/share/$file"
+} | upload
 
 echo
 echo "URL: $url"
