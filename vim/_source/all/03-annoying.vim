@@ -33,3 +33,7 @@ augroup END
 cnoremap <silent><expr> <cr> filereadable(bufname('%')) && !filewritable(bufname('%')) && getcmdtype() == ':' && getcmdline() ==# 'w'
       \ ? "\<bs>:call execute(\"".(has('mac') ? "w !osascript -e 'do shell script \\\"cat 0<&3 > %\\\" with administrator privileges' 3<&0" : "w !sudo dd of=% 2>/dev/null")."\")\<cr>:e!\<cr>"
       \ : "\<cr>"
+
+" Some commands should just do what I want, even in visual mode.
+cnoremap <expr> w getcmdtype() == ':' && getcmdline() ==# "'<,'>" ? "\<c-u>w" : 'w'
+cnoremap <expr> q getcmdtype() == ':' && getcmdline() ==# "'<,'>" ? "\<c-u>q" : 'q'
