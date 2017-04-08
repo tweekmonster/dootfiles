@@ -1,15 +1,4 @@
-" Removes the search highlight on insert mode and restores it in normal mode
-function! s:toggle_highlight()
-  if exists('g:_last_search')
-    let @/ = g:_last_search
-    unlet g:_last_search
-  else
-    let g:_last_search = @/
-    let @/ = ''
-  endif
-endfunction
-
-
+" This keeps the cursor in place when using * or #
 function! s:star_search(key) abort
   let out = '?\<\k\{-}\%#'."\<cr>"
   let key = a:key
@@ -28,35 +17,45 @@ function! s:star_search(key) abort
         \   .key.
         \   join([':call cursor(g:_pos)',
         \   ':call winrestview(g:_view)',
-        \   ':set hlsearch'], "\<cr>")."\<cr>"
+        \   ':set hlsearch',
+        \   ':unlet! g:_view',
+        \   ':unlet! g:_pos'], "\<cr>")."\<cr>"
 endfunction
 
 
+nnoremap <silent><expr> * <sid>star_search('*')
+nnoremap <silent><expr> # <sid>star_search('#')
+vnoremap <silent><expr> * <sid>star_search('*')
+vnoremap <silent><expr> # <sid>star_search('#')
+
+
+" This tries to keep the cursor away from the window edges when traversing
+" search matches.
 function! s:search_scroll(key, ...) abort
+  let old_so = &scrolloff
+  let old_sso = &sidescrolloff
+  set scrolloff=10 sidescrolloff=10
   try
-    execute "normal! " . a:key
+    execute 'normal!' a:key
   catch
-    return
   endtry
+  let &scrolloff = old_so
+  let &sidescrolloff = old_sso
 
-  let l = line('.')
-  let t = line('w0')
-  let b = t + winheight(winnr())
-  let p = (b - t) / 4
-  let scroll = ''
-
-  if l < t + p
-    let scroll = (p - (l - t))."\<c-y>"
-  elseif l > b - p
-    let scroll = (p - (b - l))."\<c-e>"
-  endif
-
-  if !empty(scroll)
-    execute 'normal!' scroll
+  let lnum = line('.')
+  let bottom = line('w0') + winheight(winnr()) - 1
+  if lnum + 10 > bottom
+    execute printf("normal! %d\<c-e>", (lnum + 10) - bottom)
   endif
 endfunction
 
 
+nnoremap <silent> n :<c-u>call <sid>search_scroll('n')<cr>
+nnoremap <silent> N :<c-u>call <sid>search_scroll('N')<cr>
+
+
+" Highlights the word under the cursor.  If in the vim filetype, matching
+" s: and <sid> functions will be highlighted.
 function! s:highlight_cursor_word(...) abort
   if &filetype =~# 'help\|qf'
     return
@@ -104,19 +103,12 @@ endfunction
 augroup vimrc_search
   autocmd!
   autocmd CursorMoved * call s:highlight_cursor_word_timer()
-  autocmd InsertEnter * call s:toggle_highlight()
-  autocmd InsertLeave * call s:toggle_highlight()
+  autocmd InsertEnter * set nohlsearch
+  autocmd InsertLeave * set hlsearch
 augroup END
 
 
 highlight default CursorWord gui=underline cterm=underline
 
-
-nnoremap <silent><expr> * <sid>star_search('*')
-nnoremap <silent><expr> # <sid>star_search('#')
-vnoremap <silent><expr> * <sid>star_search('*')
-vnoremap <silent><expr> # <sid>star_search('#')
-nnoremap <silent> n :<c-u>call <sid>search_scroll('n')<cr>
-nnoremap <silent> N :<c-u>call <sid>search_scroll('N')<cr>
 
 nnoremap <silent> <leader><space> :<c-u>let v:hlsearch=!v:hlsearch<cr>
