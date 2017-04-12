@@ -1,22 +1,18 @@
 " This keeps the cursor in place when using * or #
 function! s:star_search(key) abort
-  let out = '?\<\k\{-}\%#'."\<cr>"
-  let key = a:key
+  let g:_view = winsaveview()
+  let out = a:key
 
   if mode() ==? 'v'
-    let out = '"vy'
-    let key = (a:key == '*' ? '/' : '?') . "\<c-r>="
+    let out = '"vy' . (a:key == '*' ? '/' : '?') . "\<c-r>="
           \. 'substitute(escape(@v, ''/\.*$^~[''), ''\_s\+'', ''\\_s\\+'', ''g'')'
           \. "\<cr>\<cr>"
   endif
 
-  return out.":\<c-u>"
-        \. join([
-        \   ':let g:_view = winsaveview()',
-        \   ':let g:_pos = getpos(''.'')[1:2]'], "\<cr>")."\<cr>"
-        \   .key.
-        \   join([':call cursor(g:_pos)',
+  return out."N:\<c-u>"
+        \   .join(['let g:_pos = getpos(''.'')[1:2]',
         \   ':call winrestview(g:_view)',
+        \   ':call cursor(g:_pos)',
         \   ':set hlsearch',
         \   ':unlet! g:_view',
         \   ':unlet! g:_pos'], "\<cr>")."\<cr>"
